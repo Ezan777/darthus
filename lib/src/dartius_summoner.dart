@@ -1,11 +1,8 @@
 import 'dartius_riot_api.dart';
 
 class Summoner {
-  late String _region,
-      _summonerName,
-      _encryptedSummonerId,
-      _puuid,
-      _rankSoloDuo;
+  late String _region, _summonerName, _encryptedSummonerId, _puuid;
+  Map<String, dynamic>? _rankedSoloDuo, _rankedFlex;
 
   /// Constructor for [Summoner] class.
   ///
@@ -27,11 +24,24 @@ class Summoner {
   Future<void> buildSummoner() async {
     final Map<String, dynamic> summonerJson =
         await summonerInformation(_region, _summonerName);
-    final List<dynamic> rankedJson =
-        await rankedInformation(_region, _encryptedSummonerId);
 
     _puuid = summonerJson['puuid'];
     _encryptedSummonerId = summonerJson['id'];
+
+    final List<dynamic> rankedJson =
+        await rankedInformation(_region, _encryptedSummonerId);
+
+    if (rankedJson.isNotEmpty) {
+      for (int i = 0; i < rankedJson.length; ++i) {
+        if (rankedJson[i]['queueType'] == 'RANKED_SOLO_5x5') {
+          _rankedSoloDuo = rankedJson[i];
+        } else {
+          if (rankedJson[i]['queueType'] == 'RANKED_FLEX_SR') {
+            _rankedFlex = rankedJson[i];
+          }
+        }
+      }
+    }
   }
 
   /// Checks if the given [summonerName] is valid
@@ -45,5 +55,18 @@ class Summoner {
     }
 
     return true;
+  }
+
+  void printRankSolo() {
+    if (_rankedSoloDuo == null) {
+      print('$_summonerName is unranked');
+    } else {
+      String tier = _rankedSoloDuo!['tier'].toString();
+      tier = tier[0].toUpperCase() + tier.substring(1).toLowerCase();
+      String rank = _rankedSoloDuo!['rank'];
+      int leaguePoints = _rankedSoloDuo!['leaguePoints'];
+
+      print('$_summonerName is $tier $rank with $leaguePoints lp');
+    }
   }
 }
