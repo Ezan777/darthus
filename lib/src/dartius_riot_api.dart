@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dartius_summoner.dart';
 
 const apiKey = 'RGAPI-28c22536-bb59-48b9-87a3-e39892039fe4';
 
@@ -31,16 +30,13 @@ Future<dynamic> makeRequest(String url) async {
     switch (e as int) {
       case 400:
         throw BadRequest();
-        break;
       case 404:
         throw DataNotFound();
-        break;
       default:
         // Serious errors
         print('Serious error occurred with the http request, error code: $e');
         exit(1);
     }
-    exit(1);
   }
 }
 

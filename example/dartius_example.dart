@@ -16,7 +16,7 @@ void main() async {
     goodConnection = false;
   }
 
-  print("Ciao");
+  print("Started");
   if (goodConnection && encryptedSummonerId != null) {
     print(encryptedSummonerId);
     try {
@@ -30,5 +30,5 @@ void main() async {
     }
   }
   print(await Summoner.summonerNameIsValid('zan777'));
-  print("Finito");
+  print("Finished");
 }
