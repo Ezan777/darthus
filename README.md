@@ -14,6 +14,8 @@ and the Flutter guide for
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
+Dartius is a package that aims to give an easy access to League of Legends official API for dart's users.
+
 ## Features
 
 TODO: List what your package can do. Maybe include images, gifs, or videos.
@@ -37,3 +39,5 @@ const like = 'sample';
 TODO: Tell users more about the package: where to find more information, how to 
 contribute to the package, how to file issues, what response they can expect 
 from the package authors, and more.
+
+If you desire you can contribute to the package: https://www.github.com/Ezan777/dartius
