@@ -20,10 +20,10 @@ enum Positions {
 /// Class [Participant] is made to represent players of a single match, it will
 /// contains data of the players like kills, assists, deaths and others...
 class Participant {
-  String _puuid, _summonerName;
-  Champion _champion;
-  bool _winner, _firstBloodKill, _pentakill;
-  int _totalDamageToChampions,
+  final String _puuid, _summonerName;
+  final Champion _champion;
+  final bool _winner, _firstBloodKill, _pentakill;
+  final int _totalDamageToChampions,
       _totalCs,
       _visionScore,
       _summoner1Id,
@@ -33,7 +33,9 @@ class Participant {
       _assists,
       _champLevel,
       _goldEarned;
+  late List<int> _itemsId;
 
+  /// [participantJson] is the json file containing data about a single participant
   Participant(Map<String, dynamic> participantJson)
       : _puuid = participantJson['puuid'],
         _champion = Champion(
@@ -53,5 +55,9 @@ class Participant {
         _deaths = participantJson['deaths'],
         _assists = participantJson['assists'],
         _champLevel = participantJson['champLevel'],
-        _goldEarned = participantJson['goldEarned'];
+        _goldEarned = participantJson['goldEarned'] {
+    for (int i = 0; i < 7; ++i) {
+      _itemsId.add(participantJson['item$i']);
+    }
+  }
 }
