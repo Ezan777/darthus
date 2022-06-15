@@ -1,8 +1,10 @@
 import '../dartius_riot_api.dart';
+import 'rank/dartius_rank.dart';
 
 class Summoner {
-  late String _region, _summonerName, _encryptedSummonerId, _puuid;
-  Map<String, dynamic>? _rankedSoloDuo, _rankedFlex;
+  final String _region, _summonerName;
+  late String _encryptedSummonerId, _puuid;
+  Rank? _rankSoloDuo, _rankFlex;
 
   /// Constructor for [Summoner] class.
   ///
@@ -12,10 +14,9 @@ class Summoner {
   ///
   /// Before creation remember to check if [summonerName] exists with the static function
   /// [summonerNameIsValid].
-  Summoner(String region, String summonerName) {
-    _region = region;
-    _summonerName = summonerName;
-  }
+  Summoner(String region, String summonerName)
+      : _region = region,
+        _summonerName = summonerName;
 
   /// Build the summoner object using the [Summoner._summonerName] as starting point.
   ///
@@ -32,14 +33,10 @@ class Summoner {
         await rankedInformation(_region, _encryptedSummonerId);
 
     if (rankedJson.isNotEmpty) {
-      for (int i = 0; i < rankedJson.length; ++i) {
-        if (rankedJson[i]['queueType'] == 'RANKED_SOLO_5x5') {
-          _rankedSoloDuo = rankedJson[i];
-        } else {
-          if (rankedJson[i]['queueType'] == 'RANKED_FLEX_SR') {
-            _rankedFlex = rankedJson[i];
-          }
-        }
+      for (var json in rankedJson) {
+        json['queueType'] == 'RANKED_SOLO_5x5'
+            ? _rankSoloDuo = Rank(json)
+            : _rankFlex = Rank(json);
       }
     }
   }
@@ -57,16 +54,12 @@ class Summoner {
     return true;
   }
 
-  void printRankSolo() {
-    if (_rankedSoloDuo == null) {
-      print('$_summonerName is unranked');
+  /// Returns a string containing all information about player's solo/duo ranked
+  String rankSolo() {
+    if (_rankSoloDuo != null) {
+      return '${_rankSoloDuo!.tier()} ${_rankSoloDuo!.rank()} ${_rankSoloDuo!.lp()} lp';
     } else {
-      String tier = _rankedSoloDuo!['tier'].toString();
-      tier = tier[0].toUpperCase() + tier.substring(1).toLowerCase();
-      String rank = _rankedSoloDuo!['rank'];
-      int leaguePoints = _rankedSoloDuo!['leaguePoints'];
-
-      print('$_summonerName is $tier $rank with $leaguePoints lp');
+      return 'Unranked';
     }
   }
 }
