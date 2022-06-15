@@ -2,6 +2,8 @@ import 'package:dartius/src/types/dartius_champion.dart';
 
 import '../../dartius_riot_api.dart';
 
+// TODO Need to implement a team class
+
 enum Positions {
   BlueTop,
   BlueJungler,
@@ -29,5 +31,5 @@ class Participant {
   Participant(Positions position, String puuid)
       : _puuid = puuid,
         _position = position;
-
+  
 }

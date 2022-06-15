@@ -99,3 +99,22 @@ Future<Map<String, dynamic>> rankedFlexInfo(
   final jsonList = await rankedInformation(region, encryptedSummonerId);
   return jsonList[1];
 }
+
+/// Returns a list with most recent matches played from the user with given [puuid]
+Future<List<String>> listOfMatches(String puuid) async {
+  return await makeRequest(
+      'https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+      '$puuid'
+      '/ids?start=0&count=20&api_key=');
+}
+
+/// Returns all match's info, a json file with metadata and info.
+Future<Map<String, dynamic>> allMatchInfo(String matchCode) async {
+  return await makeRequest('https://europe.api.riotgames.com/lol/match/v5/matches/'
+      '$matchCode?api_key=');
+}
+
+/// Returns the participant at position [index] in the match identified by [matchCode]
+Future<Map<String, dynamic>> getParticipants(String matchCode, int index) async {
+  return (await allMatchInfo(matchCode))['info']['participants'][index];
+}
