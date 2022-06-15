@@ -26,6 +26,9 @@ Future<dynamic> makeRequest(String url) async {
       final values = jsonDecode(jsonString);
       return values;
     }
+  } on SocketException {
+    print("Socket exception! Closing the program...");
+    exit(1);
   } catch (e) {
     switch (e as int) {
       case 400:
