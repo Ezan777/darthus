@@ -70,4 +70,8 @@ class Summoner {
       return 'Unranked';
     }
   }
+
+  String puuid() {
+    return _puuid;
+  }
 }
