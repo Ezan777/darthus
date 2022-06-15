@@ -4,6 +4,7 @@ import 'rank/dartius_rank.dart';
 class Summoner {
   final String _region, _summonerName;
   late String _encryptedSummonerId, _puuid;
+  late int _summonerLevel, _iconId;
   Rank? _rankSoloDuo, _rankFlex;
 
   /// Constructor for [Summoner] class.
@@ -28,6 +29,8 @@ class Summoner {
 
     _puuid = summonerJson['puuid'];
     _encryptedSummonerId = summonerJson['id'];
+    _summonerLevel = summonerJson['summonerLevel'];
+    _iconId = summonerJson['profileIconId'];
 
     final List<dynamic> rankedJson =
         await rankedInformation(_region, _encryptedSummonerId);
@@ -39,6 +42,11 @@ class Summoner {
             : _rankFlex = Rank(json);
       }
     }
+  }
+
+  /// Returns the summoner's level
+  int summonerLevel() {
+    return _summonerLevel;
   }
 
   /// Checks if the given [summonerName] is valid
