@@ -1,4 +1,4 @@
-import 'dartius_riot_api.dart';
+import '../dartius_riot_api.dart';
 
 class Summoner {
   late String _region, _summonerName, _encryptedSummonerId, _puuid;
