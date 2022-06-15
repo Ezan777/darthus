@@ -50,7 +50,7 @@ class Summoner {
       await makeRequest(
           'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/'
           'by-name/$summonerName?api_key=');
-    } catch (e) {
+    } on DataNotFound {
       return false;
     }
 
