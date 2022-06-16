@@ -22,8 +22,8 @@ class Match {
     final matchId = matchJson['metadata']['matchId'];
     final gameDuration = matchJson['info']['gameDuration'];
     List<Team> teams = [
-      Team((matchJson['info']['participants'] as List).sublist(0, 4)),
-      Team((matchJson['info']['participants'] as List).sublist(5, 9))
+      Team((matchJson['info']['participants'] as List).sublist(0, 4), matchJson['info']['teams'][0]['bans']),
+      Team((matchJson['info']['participants'] as List).sublist(5, 9), matchJson['info']['teams'][1]['bans']),
     ];
 
     return Match(

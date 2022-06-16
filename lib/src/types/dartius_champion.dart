@@ -1,8 +1,10 @@
+class NameNotDefined implements Exception {}
+
 class Champion {
   final int _id;
-  final String _name;
+  String? _name;
 
-  Champion(int id, String name)
+  Champion({required int id, String? name})
       : _id = id,
         _name = name;
 
@@ -11,6 +13,10 @@ class Champion {
   }
 
   String name() {
-    return _name;
+    if (_name != null) {
+      return _name!;
+    } else {
+      throw NameNotDefined();
+    }
   }
 }

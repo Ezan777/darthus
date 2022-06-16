@@ -39,7 +39,7 @@ class Participant {
   Participant(Map<String, dynamic> participantJson)
       : _puuid = participantJson['puuid'],
         champion = Champion(
-            participantJson['championId'], participantJson['championName']),
+            id: participantJson['championId'], name: participantJson['championName']),
         _winner = participantJson['winner'],
         _firstBloodKill = participantJson['firstBloodKill'],
         _pentakill = participantJson['pentaKills'] >= 1 ? true : false,
