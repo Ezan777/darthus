@@ -1,21 +1,6 @@
 import 'package:dartius/dartius.dart';
 import 'package:dartius/src/types/dartius_champion.dart';
 
-// TODO Need to implement a team class
-
-enum Positions {
-  BlueTop,
-  BlueJungler,
-  BlueMid,
-  BlueBot,
-  BlueSupport,
-  RedTop,
-  RedJungler,
-  RedMid,
-  RedBot,
-  RedSupport,
-}
-
 /// Class [Participant] is made to represent players of a single match, it will
 /// contains data of the players like kills, assists, deaths and others...
 class Participant {
@@ -39,8 +24,9 @@ class Participant {
   Participant(Map<String, dynamic> participantJson)
       : _puuid = participantJson['puuid'],
         champion = Champion(
-            id: participantJson['championId'], name: participantJson['championName']),
-        _winner = participantJson['winner'],
+            id: participantJson['championId'],
+            name: participantJson['championName']),
+        _winner = participantJson['win'],
         _firstBloodKill = participantJson['firstBloodKill'],
         _pentakill = participantJson['pentaKills'] >= 1 ? true : false,
         _summonerName = participantJson['summonerName'],
@@ -57,7 +43,8 @@ class Participant {
         _champLevel = participantJson['champLevel'],
         _goldEarned = participantJson['goldEarned'],
         _goldSpent = participantJson['goldSpent'] {
-    for (int i = 0; i < 7; ++i) {
+    _itemsId = [participantJson['item0']];
+    for (int i = 1; i < 7; ++i) {
       _itemsId.add(participantJson['item$i']);
     }
   }
@@ -98,7 +85,7 @@ class Participant {
   }
 
   /// Returns a map with information about the champion played.
-  /// 
+  ///
   /// The keys of the map are: [championId], [championName], [championLevel]
   Map<String, dynamic> championInfo() {
     return <String, dynamic>{

@@ -34,10 +34,10 @@ class Match {
   }
 
   /// Build the match from the json returned by riot api
-  Future<void> buildFromApi() async {
+  Future<Match> buildFromApi() async {
     final matchJson = await allMatchInfo(_region, _matchId);
 
-    Match.fromJson(matchJson, _region);
+    return Match.fromJson(matchJson, _region);
   }
 
   Team blueSideTeam() {
@@ -61,7 +61,7 @@ class Match {
   String gameDurationInMinutes() {
     if (_gameDuration != null) {
       final int minutes = _gameDuration! ~/ 60;
-      final int seconds = (minutes - (_gameDuration! / 60) * 60).toInt();
+      final int seconds = (((_gameDuration! / 60) - minutes) * 60).toInt();
       return '$minutes:$seconds';
     } else {
       throw MatchNotBuilt();

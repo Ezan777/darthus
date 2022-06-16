@@ -6,7 +6,9 @@ class Team {
   late List<Champion> _bans;
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList) {
-    for (int i = 0; i < participantJsonList.length; ++i) {
+    _participants = [Participant(participantJsonList[0])];
+    _bans = [Champion(id: bansJsonList[0]['championId'])];
+    for (int i = 1; i < participantJsonList.length; ++i) {
       _participants.add(Participant(participantJsonList[i]));
       _bans.add(Champion(id: bansJsonList[i]['championId']));
     }

@@ -12,11 +12,9 @@ void main() async {
     await summoner.buildSummoner(); // Now summoner is ready for use
     await summoner2.buildSummoner();
 
-    final int gameDuration =
-        (await allMatchInfo('europe', 'EUW1_5877600674'))['info']
-            ['gameDuration'] as int;
-    print(
-        'Game duration: ${gameDuration~/60}:${((gameDuration / 60 - gameDuration ~/ 60) * 60).toInt()} minutes');
+    final match = await Match(region: 'europe', matchId: 'EUW1_5877600674').buildFromApi();
+
+    print('Game duration: ${match.gameDurationInMinutes()}');
     print('$summonerName is ${summoner.rankSolo()}');
     print('$summoner2Name is ${summoner2.rankSolo()}');
   } else {
