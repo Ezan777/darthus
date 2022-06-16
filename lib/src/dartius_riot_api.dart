@@ -22,12 +22,18 @@ Future<dynamic> makeRequest(String url) async {
       throw response.statusCode;
     } else {
       final jsonFiles = await response.transform(const Utf8Decoder()).toList();
-      final String jsonString = jsonFiles.first;
+      String jsonString = '';
+      for (int i = 0; i < jsonFiles.length; ++i) {
+        jsonString += jsonFiles[i];
+      }
       final values = jsonDecode(jsonString);
       return values;
     }
   } on SocketException {
     print("Socket exception! Closing the program...");
+    exit(1);
+  } on FormatException {
+    print("Format exception! Closing the program...");
     exit(1);
   } catch (e) {
     switch (e as int) {
@@ -101,20 +107,23 @@ Future<Map<String, dynamic>> rankedFlexInfo(
 }
 
 /// Returns a list with most recent matches played from the user with given [puuid]
-Future<List<String>> listOfMatches(String puuid) async {
+Future<List<String>> listOfMatches(String region, String puuid) async {
   return await makeRequest(
-      'https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+      'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
       '$puuid'
       '/ids?start=0&count=20&api_key=');
 }
 
 /// Returns all match's info, a json file with metadata and info.
-Future<Map<String, dynamic>> allMatchInfo(String matchCode) async {
-  return await makeRequest('https://europe.api.riotgames.com/lol/match/v5/matches/'
+Future<Map<String, dynamic>> allMatchInfo(
+    String region, String matchCode) async {
+  return await makeRequest('https://'
+      '$region.api.riotgames.com/lol/match/v5/matches/'
       '$matchCode?api_key=');
 }
 
 /// Returns the participant at position [index] in the match identified by [matchCode]
-Future<Map<String, dynamic>> getParticipants(String matchCode, int index) async {
-  return (await allMatchInfo(matchCode))['info']['participants'][index];
+Future<Map<String, dynamic>> getParticipant(
+    String region, String matchCode, int index) async {
+  return (await allMatchInfo(region, matchCode))['info']['participants'][index];
 }
