@@ -2,25 +2,33 @@ import 'package:dartius/src/types/dartius_champion.dart';
 import 'package:dartius/src/types/matches/dartius_participant.dart';
 
 class Team {
-  late List<Participant> participants;
-  late List<Champion> bans;
+  late List<Participant> _participants;
+  late List<Champion> _bans;
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList) {
     for (int i = 0; i < participantJsonList.length; ++i) {
-      participants.add(Participant(participantJsonList[i]));
-      bans.add(Champion(id: bansJsonList[i]['championId']));
+      _participants.add(Participant(participantJsonList[i]));
+      _bans.add(Champion(id: bansJsonList[i]['championId']));
     }
+  }
+
+  List<Participant> participants() {
+    return _participants;
+  }
+
+  List<Champion> bans() {
+    return _bans;
   }
 
   int totalKills() {
     int totalKills = 0;
-    for (int i = 0; i < participants.length; ++i) {
-      totalKills += participants[i].score()['kills'] ?? 0;
+    for (int i = 0; i < _participants.length; ++i) {
+      totalKills += _participants[i].score()['kills'] ?? 0;
     }
     return totalKills;
   }
 
   bool isWinner() {
-    return participants[0].isWinner();
+    return _participants[0].isWinner();
   }
 }
