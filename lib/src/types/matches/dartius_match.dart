@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dartius/src/dartius_riot_api.dart';
 import 'package:dartius/src/types/matches/dartius_teams.dart';
 
@@ -35,10 +33,27 @@ class Match {
         teams: teams);
   }
 
-  Future<void> getFromApi() async {
+  /// Build the match from the json returned by riot api
+  Future<void> buildFromApi() async {
     final matchJson = await allMatchInfo(_region, _matchId);
 
     Match.fromJson(matchJson, _region);
+  }
+
+  Team blueSideTeam() {
+    if (_teams != null) {
+      return _teams!.first;
+    } else {
+      throw MatchNotBuilt();
+    }
+  }
+
+  Team redSideTeam() {
+    if (_teams != null) {
+      return _teams!.last;
+    } else {
+      throw MatchNotBuilt();
+    }
   }
 
   /// Returns the game duration of the match in minutes with the following format
