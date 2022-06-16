@@ -44,11 +44,6 @@ class Summoner {
     }
   }
 
-  /// Returns the summoner's level
-  int summonerLevel() {
-    return _summonerLevel;
-  }
-
   /// Checks if the given [summonerName] is valid
   static Future<bool> summonerNameIsValid(String summonerName) async {
     try {
@@ -69,6 +64,23 @@ class Summoner {
     } else {
       return 'Unranked';
     }
+  }
+
+  String rankFlex() {
+    if (_rankFlex != null) {
+      return '${_rankFlex!.tier()} ${_rankFlex!.rank()} ${_rankFlex!.lp()} lp';
+    } else {
+      return 'Unranked';
+    }
+  }
+
+  /// Returns the summoner's level
+  int summonerLevel() {
+    return _summonerLevel;
+  }
+
+  int iconId() {
+    return _iconId;
   }
 
   String puuid() {
