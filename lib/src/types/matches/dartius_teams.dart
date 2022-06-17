@@ -5,14 +5,16 @@ import '../dartius_summoner.dart';
 
 class Team {
   late List<Participant> _participants;
-  late List<Champion> _bans;
+  List<Champion>? _bans;
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList) {
     _participants = [Participant(participantJsonList[0])];
-    _bans = [Champion(id: bansJsonList[0]['championId'])];
-    for (int i = 1; i < participantJsonList.length; ++i) {
-      _participants.add(Participant(participantJsonList[i]));
-      _bans.add(Champion(id: bansJsonList[i]['championId']));
+    if(bansJsonList.isNotEmpty) {
+      _bans = [Champion(id: bansJsonList[0]['championId'])];
+      for (int i = 0; i < participantJsonList.length; ++i) {
+        _participants.add(Participant(participantJsonList[i]));
+        _bans!.add(Champion(id: bansJsonList[i]['championId']));
+      }
     }
   }
 
@@ -35,7 +37,8 @@ class Team {
     }
   }
 
-  List<Champion> bans() {
+  /// Returns null if the game didn't have bans
+  List<Champion>? bans() {
     return _bans;
   }
 

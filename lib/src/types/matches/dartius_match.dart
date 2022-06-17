@@ -74,7 +74,7 @@ class Match {
 
   /// Returns the participant corresponding to the given [summoner]. If the summoner
   /// didn't play in this game it will return null.
-  Participant? getParticipantFromSummoner(Summoner summoner) {
+  Participant? participantFromSummoner(Summoner summoner) {
     if (_teams != null) {
       bool found = false;
       Participant? participant;

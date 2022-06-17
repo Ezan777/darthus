@@ -11,10 +11,14 @@ void main() async {
     await summoner.buildSummoner(); // Now summoner is ready for use
     await summoner2.buildSummoner();
 
-    final match = await Match(region: 'europe', matchId: 'EUW1_5877600674')
+    /*final match = await Match(region: 'europe', matchId: 'EUW1_5877600674')
         .buildFromApi();
 
-    print('Game duration: ${match.gameDurationInMinutes()}');
+    print('Game duration: ${match.gameDurationInMinutes()}');*/
+
+    await summoner2.buildMatchAt(0);
+    await summoner2.buildMatchAt(1);
+    print((summoner2.participantOfMatch(1)!.championInfo())['championName']);
     print('$summonerName is ${summoner.rankSolo()}');
     print('$summoner2Name is ${summoner2.rankSolo()}');
   } else {

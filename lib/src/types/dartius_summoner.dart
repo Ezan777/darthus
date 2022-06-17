@@ -1,10 +1,16 @@
 import '../dartius_riot_api.dart';
 import 'rank/dartius_rank.dart';
+import 'matches/dartius_match.dart';
+import 'matches/dartius_participant.dart';
+
+class MatchDoesNotExists implements Exception {}
 
 class Summoner {
   final String _region, _summonerName;
-  late String _encryptedSummonerId, _puuid;
+  late String _encryptedSummonerId, _puuid, _worldWideRegion;
   late int _summonerLevel, _iconId;
+  late List<dynamic> _matchHistory;
+  List<Match> _allMatches;
   Rank? _rankSoloDuo, _rankFlex;
 
   /// Constructor for [Summoner] class.
@@ -17,7 +23,21 @@ class Summoner {
   /// [summonerNameIsValid].
   Summoner(String region, String summonerName)
       : _region = region,
-        _summonerName = summonerName;
+        _summonerName = summonerName,
+        _allMatches = <Match>[] {
+    if (_region == 'euw1' || _region == 'eun1' || _region == 'ru') {
+      _worldWideRegion = 'europe';
+    } else {
+      if (_region == 'na' ||
+          _region == 'la1' ||
+          _region == 'la2' ||
+          region == 'br1') {
+        _worldWideRegion = 'americas';
+      } else {
+        _worldWideRegion = 'asia';
+      }
+    }
+  }
 
   /// Build the summoner object using the [Summoner._summonerName] as starting point.
   ///
@@ -41,6 +61,27 @@ class Summoner {
             ? _rankSoloDuo = Rank(json)
             : _rankFlex = Rank(json);
       }
+    }
+
+    Future.delayed(Duration(milliseconds: 500));
+
+    _matchHistory = await listOfMatches(_worldWideRegion, _puuid);
+  }
+
+  /// Builds the match located at the position [index] in the match history
+  Future<void> buildMatchAt(int index) async {
+    _allMatches.add(Match.fromJson(
+        await allMatchInfo(_worldWideRegion, _matchHistory[index]),
+        _worldWideRegion));
+  }
+
+  /// Returns the participant that corresponds to the summoner in the match located
+  /// at the given [index]. Returns null if the summoner didn't play in this match.
+  Participant? participantOfMatch(int index) {
+    if (index > _allMatches.length - 1 || index < 0) {
+      throw MatchDoesNotExists();
+    } else {
+      return _allMatches[index].participantFromSummoner(this);
     }
   }
 
