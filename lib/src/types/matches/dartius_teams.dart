@@ -1,5 +1,7 @@
-import 'package:dartius/src/types/dartius_champion.dart';
-import 'package:dartius/src/types/matches/dartius_participant.dart';
+import '../dartius_champion.dart';
+import 'dartius_teams.dart';
+import 'dartius_participant.dart';
+import '../dartius_summoner.dart';
 
 class Team {
   late List<Participant> _participants;
@@ -16,6 +18,21 @@ class Team {
 
   List<Participant> participants() {
     return _participants;
+  }
+
+  /// Searches for the given [summoner] in the participants, if the summoners
+  /// played in this team it returns the corresponding participant otherwise it returns null.
+  Participant? findSummoner(Summoner summoner) {
+    bool found = false;
+    for (int i = 0; i < _participants.length && !found; ++i) {
+      if (_participants[i].isEqualToTheSummoner(summoner)) {
+        return _participants[i];
+      }
+    }
+
+    if (!found) {
+      return null;
+    }
   }
 
   List<Champion> bans() {

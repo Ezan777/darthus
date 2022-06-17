@@ -1,5 +1,4 @@
 import 'package:dartius/dartius.dart';
-import 'package:dartius/src/dartius_riot_api.dart';
 
 void main() async {
   final String summonerName = 'zan777', summoner2Name = 'bondighidighi';
@@ -12,7 +11,8 @@ void main() async {
     await summoner.buildSummoner(); // Now summoner is ready for use
     await summoner2.buildSummoner();
 
-    final match = await Match(region: 'europe', matchId: 'EUW1_5877600674').buildFromApi();
+    final match = await Match(region: 'europe', matchId: 'EUW1_5877600674')
+        .buildFromApi();
 
     print('Game duration: ${match.gameDurationInMinutes()}');
     print('$summonerName is ${summoner.rankSolo()}');

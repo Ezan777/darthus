@@ -1,5 +1,7 @@
-import 'package:dartius/src/dartius_riot_api.dart';
-import 'package:dartius/src/types/matches/dartius_teams.dart';
+import '../dartius_summoner.dart';
+import '../../dartius_riot_api.dart';
+import 'dartius_teams.dart';
+import 'dartius_participant.dart';
 
 class MatchNotBuilt implements Exception {}
 
@@ -22,8 +24,10 @@ class Match {
     final matchId = matchJson['metadata']['matchId'];
     final gameDuration = matchJson['info']['gameDuration'];
     List<Team> teams = [
-      Team((matchJson['info']['participants'] as List).sublist(0, 4), matchJson['info']['teams'][0]['bans']),
-      Team((matchJson['info']['participants'] as List).sublist(5, 9), matchJson['info']['teams'][1]['bans']),
+      Team((matchJson['info']['participants'] as List).sublist(0, 4),
+          matchJson['info']['teams'][0]['bans']),
+      Team((matchJson['info']['participants'] as List).sublist(5, 9),
+          matchJson['info']['teams'][1]['bans']),
     ];
 
     return Match(
@@ -65,6 +69,25 @@ class Match {
       return '$minutes:$seconds';
     } else {
       throw MatchNotBuilt();
+    }
+  }
+
+  /// Returns the participant corresponding to the given [summoner]. If the summoner
+  /// didn't play in this game it will return null.
+  Participant? getParticipantFromSummoner(Summoner summoner) {
+    if (_teams != null) {
+      bool found = false;
+      Participant? participant;
+      for (int i = 0; i < _teams!.length && !found; ++i) {
+        participant = _teams![i].findSummoner(summoner);
+        if (participant != null) {
+          found = true;
+        }
+      }
+
+      return participant;
+    } else {
+      throw MatchNotBuilt;
     }
   }
 
