@@ -106,12 +106,12 @@ Future<Map<String, dynamic>> rankedFlexInfo(
   return jsonList[1];
 }
 
-/// Returns a list with most recent matches played from the user with given [puuid]
-Future<List<dynamic>> listOfMatches(String region, String puuid) async {
+/// Returns a list with most recent ranked matches played from the user with given [puuid]
+Future<List<dynamic>> listOfRankedMatches(String region, String puuid) async {
   return await makeRequest(
       'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
       '$puuid'
-      '/ids?start=0&count=20&api_key=');
+      '/ids?type=ranked&start=0&count=20&api_key=');
 }
 
 /// Returns all match's info, a json file with metadata and info.

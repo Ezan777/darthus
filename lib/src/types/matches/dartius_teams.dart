@@ -9,9 +9,9 @@ class Team {
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList) {
     _participants = [Participant(participantJsonList[0])];
-    if(bansJsonList.isNotEmpty) {
+    if (bansJsonList.isNotEmpty) {
       _bans = [Champion(id: bansJsonList[0]['championId'])];
-      for (int i = 0; i < participantJsonList.length; ++i) {
+      for (int i = 1; i < participantJsonList.length; ++i) {
         _participants.add(Participant(participantJsonList[i]));
         _bans!.add(Champion(id: bansJsonList[i]['championId']));
       }

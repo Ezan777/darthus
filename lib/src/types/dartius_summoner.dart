@@ -25,13 +25,17 @@ class Summoner {
       : _region = region,
         _summonerName = summonerName,
         _allMatches = <Match>[] {
-    if (_region == 'euw1' || _region == 'eun1' || _region == 'ru') {
+    if (_region == 'euw1' ||
+        _region == 'eun1' ||
+        _region == 'ru' ||
+        _region == 'tr') {
       _worldWideRegion = 'europe';
     } else {
       if (_region == 'na' ||
           _region == 'la1' ||
           _region == 'la2' ||
-          region == 'br1') {
+          region == 'br1' ||
+          _region == 'oce') {
         _worldWideRegion = 'americas';
       } else {
         _worldWideRegion = 'asia';
@@ -65,7 +69,21 @@ class Summoner {
 
     Future.delayed(Duration(milliseconds: 500));
 
-    _matchHistory = await listOfMatches(_worldWideRegion, _puuid);
+    _matchHistory = await listOfRankedMatches(_worldWideRegion, _puuid);
+  }
+
+  Future<void> buildAllMatches() async {
+    for (int i = 0; i < _matchHistory.length; ++i) {
+      buildMatchAt(i);
+    }
+  }
+
+  List<dynamic> matchHistory() {
+    return _matchHistory;
+  }
+
+  List<Match> allMatches() {
+    return _allMatches;
   }
 
   /// Builds the match located at the position [index] in the match history
@@ -118,6 +136,10 @@ class Summoner {
   /// Returns the summoner's level
   int summonerLevel() {
     return _summonerLevel;
+  }
+
+  String summonerName() {
+    return _summonerName;
   }
 
   int iconId() {
