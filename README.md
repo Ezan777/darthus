@@ -11,33 +11,36 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-Dartius is a package that aims to give an easy access to League of Legends official API for dart's users.
+Dartius is a package that aim to give an easy and intuitive access to league of legends API.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+This package can retrieve information for a summoner and his matches.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Before using the package remeber set your api key like that:
 
 ```dart
-const like = 'sample';
+ApiRequest.setApiKey(myApyKey);
+```
+
+Since constructors can't be async you must invoke the function buildSummoner before using a summoner instance.
+
+```dart
+// Creating an instance of the summoner class
+Summoner summoner('euw1', 'summonerName');
+// Getting all data from servers (async method)
+await summoner.buildSummoner;
+```
+
+The *buildSummoner* method will retrieve a list with the last 20 matches played by the summoner (default request), if you want you can call the *getMatches* method where you can choose the number of matches (max 100) and what type of matches the server is going to send you. The type of matches must be specified using the *matchType* enum, like this:
+
+```dart
+matchType.normal;
+matchType.ranked;
 ```
 
 ## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
 
 If you desire you can contribute to the package: https://www.github.com/Ezan777/dartius
