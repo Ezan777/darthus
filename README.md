@@ -19,7 +19,7 @@ This package can retrieve information for a summoner and his matches.
 
 ## Usage
 
-Before using the package remeber set your api key like that:
+Before using the package remember set your api key like that:
 
 ```dart
 ApiRequest.setApiKey(myApyKey);
