@@ -109,30 +109,35 @@ Future<Map<String, dynamic>> rankedFlexInfo(
 }
 
 /// Return a list of matches with the following filters: [numberOfMatches] is the number of matches
-/// that the request is going to retrieve, [type] represents what matches are we going to retrieve.
+/// that the request is going to retrieve, it must be 0 <= [numberOfMatches] <= 100 otherwise it will use the default value 20;
+/// [type] represents what matches are we going to retrieve.
 Future<List<dynamic>> listOfMatches(
     {required String region,
     required String puuid,
     int numberOfMatches = 20,
     matchType? type}) async {
+      
+  if (numberOfMatches < 0 || numberOfMatches > 100) {
+    numberOfMatches = 20;
+  }
 
-    switch (type) {
-      case matchType.ranked:
-        return await makeRequest(
-            'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
-            '$puuid'
-            '/ids?type=ranked&start=0&count=$numberOfMatches&api_key=');
-      case matchType.normal:
-        return await makeRequest(
-            'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
-            '$puuid'
-            '/ids?type=normal&start=0&count=$numberOfMatches&api_key=');
-      default:
-        return await makeRequest(
+  switch (type) {
+    case matchType.ranked:
+      return await makeRequest(
+          'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+          '$puuid'
+          '/ids?type=ranked&start=0&count=$numberOfMatches&api_key=');
+    case matchType.normal:
+      return await makeRequest(
+          'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+          '$puuid'
+          '/ids?type=normal&start=0&count=$numberOfMatches&api_key=');
+    default:
+      return await makeRequest(
           'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
           '$puuid'
           '/ids?start=0&count=$numberOfMatches&api_key=');
-    }
+  }
 }
 
 /// Returns all match's info, a json file with metadata and info.
