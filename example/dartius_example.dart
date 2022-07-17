@@ -1,6 +1,11 @@
 import 'package:dartius/dartius.dart';
+import 'package:dartius/src/dartius_riot_api.dart';
+// This file is needed if you want to store the api key in another place so it 
+// wont be uploaded to github.
+import 'api_key.dart';
 
 void main() async {
+  ApiRequest.setApiKey(key: myApiKey);
   final String summonerName = 'zan777', summoner2Name = 'bondighidighi';
   // Check if the summoner name is valid, in order to avoid connection errors
   if (await Summoner.summonerNameIsValid(summonerName)) {

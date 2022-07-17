@@ -39,7 +39,7 @@ class Match {
 
   /// Build the match from the json returned by riot api
   Future<Match> buildFromApi() async {
-    final matchJson = await allMatchInfo(_region, _matchId);
+    final matchJson = await ApiRequest.allMatchInfo(_region, _matchId);
 
     return Match.fromJson(matchJson, _region);
   }

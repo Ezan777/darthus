@@ -52,7 +52,7 @@ class Summoner {
   /// function [summonerNameIsValid].
   Future<void> buildSummoner() async {
     final Map<String, dynamic> summonerJson =
-        await summonerInformation(_region, _summonerName);
+        await ApiRequest.summonerInformation(_region, _summonerName);
 
     _puuid = summonerJson['puuid'];
     _encryptedSummonerId = summonerJson['id'];
@@ -60,7 +60,7 @@ class Summoner {
     _iconId = summonerJson['profileIconId'];
 
     final List<dynamic> rankedJson =
-        await rankedInformation(_region, _encryptedSummonerId);
+        await ApiRequest.rankedInformation(_region, _encryptedSummonerId);
 
     if (rankedJson.isNotEmpty) {
       for (var json in rankedJson) {
@@ -72,7 +72,7 @@ class Summoner {
 
     Future.delayed(Duration(milliseconds: 500));
 
-    _matchHistory = await listOfMatches(region: _worldWideRegion, puuid: _puuid);
+    _matchHistory = await ApiRequest.listOfMatches(region: _worldWideRegion, puuid: _puuid);
   }
 
   /// This function build all the matches in the match history. Be sure to have
@@ -94,7 +94,7 @@ class Summoner {
   /// Builds the match located at the position [index] in the match history
   Future<void> buildMatchAt(int index) async {
     _allMatches.add(Match.fromJson(
-        await allMatchInfo(_worldWideRegion, _matchHistory[index]),
+        await ApiRequest.allMatchInfo(_worldWideRegion, _matchHistory[index]),
         _worldWideRegion));
   }
 
@@ -111,7 +111,7 @@ class Summoner {
   /// Checks if the given [summonerName] is valid
   static Future<bool> summonerNameIsValid(String summonerName) async {
     try {
-      await makeRequest(
+      await ApiRequest.makeRequest(
           'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/'
           'by-name/$summonerName?api_key=');
     } on DataNotFound {
