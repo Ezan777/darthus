@@ -3,7 +3,6 @@
 /// More dartdocs go here.
 library dartius;
 
-export 'src/dartius_base.dart';
 export 'src/dartius_riot_api.dart';
 export 'src/types/rank/dartius_rank.dart';
 export 'src/types/dartius_summoner.dart';
