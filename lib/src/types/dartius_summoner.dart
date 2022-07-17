@@ -34,11 +34,14 @@ class Summoner {
       if (_region == 'na' ||
           _region == 'la1' ||
           _region == 'la2' ||
-          region == 'br1' ||
-          _region == 'oce') {
+          region == 'br1') {
         _worldWideRegion = 'americas';
       } else {
-        _worldWideRegion = 'asia';
+        if (_region == 'oc1') {
+          _worldWideRegion = 'sea';
+        } else {
+          _worldWideRegion = 'asia';
+        }
       }
     }
   }
@@ -69,9 +72,11 @@ class Summoner {
 
     Future.delayed(Duration(milliseconds: 500));
 
-    _matchHistory = await listOfRankedMatches(_worldWideRegion, _puuid);
+    _matchHistory = await listOfMatches(region: _worldWideRegion, puuid: _puuid, type: matchType.ranked);
   }
 
+  /// This function build all the matches in the match history. Be sure to have
+  /// enough API request rate before calling this function.
   Future<void> buildAllMatches() async {
     for (int i = 0; i < _matchHistory.length; ++i) {
       buildMatchAt(i);

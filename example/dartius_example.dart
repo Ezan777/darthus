@@ -1,7 +1,7 @@
 import 'package:dartius/dartius.dart';
 
 void main() async {
-  final String summonerName = 'zan777', summoner2Name = 'paolocannone';
+  final String summonerName = 'zan777', summoner2Name = 'bondighidighi';
   // Check if the summoner name is valid, in order to avoid connection errors
   if (await Summoner.summonerNameIsValid(summonerName)) {
     // Create the summoner object that at the moment it's empty
@@ -18,7 +18,10 @@ void main() async {
 
     await summoner2.buildMatchAt(0);
     await summoner2.buildMatchAt(1);
-    print((summoner2.participantOfMatch(0)!.championInfo())['championName']);
+    await summoner2.buildMatchAt(2);
+    await summoner2.buildMatchAt(3);
+    await summoner2.buildMatchAt(4);
+    print((summoner2.participantOfMatch(4)!.championInfo())['championName']);
     print(summoner2.puuid());
     print('$summonerName is ${summoner.rankSolo()}');
     print('$summoner2Name is ${summoner2.rankSolo()}');

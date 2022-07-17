@@ -4,6 +4,8 @@ import 'dart:io';
 
 const apiKey = 'RGAPI-28c22536-bb59-48b9-87a3-e39892039fe4';
 
+enum matchType { ranked, normal }
+
 class DataNotFound implements Exception {}
 
 class BadRequest implements Exception {}
@@ -106,12 +108,31 @@ Future<Map<String, dynamic>> rankedFlexInfo(
   return jsonList[1];
 }
 
-/// Returns a list with most recent ranked matches played from the user with given [puuid]
-Future<List<dynamic>> listOfRankedMatches(String region, String puuid) async {
-  return await makeRequest(
-      'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
-      '$puuid'
-      '/ids?type=ranked&start=0&count=20&api_key=');
+/// Return a list of matches with the following filters: [numberOfMatches] is the number of matches
+/// that the request is going to retrieve, [type] represents what matches are we going to retrieve.
+Future<List<dynamic>> listOfMatches(
+    {required String region,
+    required String puuid,
+    int numberOfMatches = 20,
+    matchType? type}) async {
+
+    switch (type) {
+      case matchType.ranked:
+        return await makeRequest(
+            'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+            '$puuid'
+            '/ids?type=ranked&start=0&count=$numberOfMatches&api_key=');
+      case matchType.normal:
+        return await makeRequest(
+            'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+            '$puuid'
+            '/ids?type=normal&start=0&count=$numberOfMatches&api_key=');
+      default:
+        return await makeRequest(
+          'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
+          '$puuid'
+          '/ids?start=0&count=$numberOfMatches&api_key=');
+    }
 }
 
 /// Returns all match's info, a json file with metadata and info.

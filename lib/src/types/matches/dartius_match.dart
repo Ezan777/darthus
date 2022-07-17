@@ -26,7 +26,7 @@ class Match {
     List<Team> teams = [
       Team((matchJson['info']['participants'] as List).sublist(0, 5),
           matchJson['info']['teams'][0]['bans']),
-      Team((matchJson['info']['participants'] as List).sublist(6, 10),
+      Team((matchJson['info']['participants'] as List).sublist(5, 10),
           matchJson['info']['teams'][1]['bans']),
     ];
 
