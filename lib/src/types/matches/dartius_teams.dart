@@ -15,6 +15,10 @@ class Team {
         _participants.add(Participant(participantJsonList[i]));
         _bans!.add(Champion(id: bansJsonList[i]['championId']));
       }
+    } else {
+      for (int i = 1; i < participantJsonList.length; ++i) {
+        _participants.add(Participant(participantJsonList[i]));
+      }
     }
   }
 

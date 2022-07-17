@@ -72,7 +72,7 @@ class Summoner {
 
     Future.delayed(Duration(milliseconds: 500));
 
-    _matchHistory = await listOfMatches(region: _worldWideRegion, puuid: _puuid, type: matchType.ranked);
+    _matchHistory = await listOfMatches(region: _worldWideRegion, puuid: _puuid);
   }
 
   /// This function build all the matches in the match history. Be sure to have

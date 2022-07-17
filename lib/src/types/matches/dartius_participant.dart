@@ -43,10 +43,12 @@ class Participant {
         _champLevel = participantJson['champLevel'],
         _goldEarned = participantJson['goldEarned'],
         _goldSpent = participantJson['goldSpent'] {
+    
     _itemsId = [participantJson['item0']];
     for (int i = 1; i < 7; ++i) {
       _itemsId.add(participantJson['item$i']);
     }
+    
   }
 
   /// Returns a map containing the score of the player.
