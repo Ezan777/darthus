@@ -34,4 +34,8 @@ class Rank {
   String rank() {
     return _rank;
   }
+
+  double winPercentage() {
+    return double.parse(((_wins / (_wins + _losses)) * 100).toStringAsFixed(2));
+  }
 }

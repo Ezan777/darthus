@@ -72,7 +72,8 @@ class Summoner {
 
     Future.delayed(Duration(milliseconds: 500));
 
-    _matchHistory = await ApiRequest.listOfMatches(region: _worldWideRegion, puuid: _puuid);
+    _matchHistory =
+        await ApiRequest.listOfMatches(region: _worldWideRegion, puuid: _puuid);
   }
 
   /// This function build all the matches in the match history. Be sure to have
@@ -81,6 +82,14 @@ class Summoner {
     for (int i = 0; i < _matchHistory.length; ++i) {
       buildMatchAt(i);
     }
+  }
+
+  Future<void> getMatches({required int numberOfMatches, matchType? type}) async {
+    _matchHistory = await ApiRequest.listOfMatches(
+        region: _worldWideRegion,
+        puuid: _puuid,
+        numberOfMatches: numberOfMatches,
+        type: type);
   }
 
   List<dynamic> matchHistory() {
@@ -124,7 +133,7 @@ class Summoner {
   /// Returns a string containing all information about player's solo/duo ranked
   String rankSolo() {
     if (_rankSoloDuo != null) {
-      return '${_rankSoloDuo!.tier()} ${_rankSoloDuo!.rank()} ${_rankSoloDuo!.lp()} lp';
+      return '${_rankSoloDuo!.tier()} ${_rankSoloDuo!.rank()} ${_rankSoloDuo!.lp()} lp and ${_rankSoloDuo!.winPercentage()}% win rate';
     } else {
       return 'Unranked';
     }
