@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../dartius_riot_api.dart';
+import '../../darthus_riot_api.dart';
 
 class Rank {
   final String _tier;

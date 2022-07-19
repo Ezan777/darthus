@@ -1,7 +1,7 @@
-import '../dartius_riot_api.dart';
-import 'rank/dartius_rank.dart';
-import 'matches/dartius_match.dart';
-import 'matches/dartius_participant.dart';
+import '../darthus_riot_api.dart';
+import 'rank/darthus_rank.dart';
+import 'matches/darthus_match.dart';
+import 'matches/darthus_participant.dart';
 
 class MatchDoesNotExists implements Exception {}
 

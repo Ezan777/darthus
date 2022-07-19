@@ -1,7 +1,7 @@
-import '../dartius_summoner.dart';
-import '../../dartius_riot_api.dart';
-import 'dartius_teams.dart';
-import 'dartius_participant.dart';
+import '../darthus_summoner.dart';
+import '../../darthus_riot_api.dart';
+import 'darthus_teams.dart';
+import 'darthus_participant.dart';
 
 class MatchNotBuilt implements Exception {}
 

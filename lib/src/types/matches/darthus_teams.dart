@@ -1,7 +1,7 @@
-import '../dartius_champion.dart';
-import 'dartius_teams.dart';
-import 'dartius_participant.dart';
-import '../dartius_summoner.dart';
+import '../darthus_champion.dart';
+import 'darthus_teams.dart';
+import 'darthus_participant.dart';
+import '../darthus_summoner.dart';
 
 class Team {
   late List<Participant> _participants;

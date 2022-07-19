@@ -1,5 +1,5 @@
-import 'package:dartius/dartius.dart';
-import 'package:dartius/src/dartius_riot_api.dart';
+import 'package:darthus/darthus.dart';
+import 'package:darthus/src/darthus_riot_api.dart';
 // This file is needed if you want to store the api key in another place so it 
 // wont be uploaded to github.
 import 'api_key.dart';

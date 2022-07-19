@@ -1,5 +1,5 @@
-import 'package:dartius/dartius.dart';
-import 'package:dartius/src/types/dartius_champion.dart';
+import 'package:darthus/darthus.dart';
+import 'package:darthus/src/types/darthus_champion.dart';
 
 /// Class [Participant] is made to represent players of a single match, it will
 /// contains data of the players like kills, assists, deaths and others...
