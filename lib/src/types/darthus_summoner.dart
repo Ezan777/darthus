@@ -10,7 +10,7 @@ class Summoner {
   late String _encryptedSummonerId, _puuid, _worldWideRegion;
   late int _summonerLevel, _iconId;
   late List<dynamic> _matchHistory;
-  List<Match> _allMatches;
+  final List<Match> _allMatches;
   Rank? _rankSoloDuo, _rankFlex;
   bool _isBuilt;
 
@@ -94,7 +94,7 @@ class Summoner {
   /// This method does **not** build the matches, so after calling this method
   /// remember to build matches.
   Future<void> getMatches(
-      {required int numberOfMatches, matchType? type}) async {
+      {required int numberOfMatches, MatchType? type}) async {
     _matchHistory = await ApiRequest.listOfMatches(
         region: _worldWideRegion,
         puuid: _puuid,

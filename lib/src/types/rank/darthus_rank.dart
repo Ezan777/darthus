@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import '../../darthus_riot_api.dart';
-
 class Rank {
   final String _tier;
   final String _queueType;

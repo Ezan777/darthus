@@ -4,7 +4,7 @@ import 'dart:io';
 
 late String apiKey;
 
-enum matchType { ranked, normal }
+enum MatchType { ranked, normal }
 
 class DataNotFound implements Exception {}
 
@@ -123,18 +123,18 @@ class ApiRequest {
       {required String region,
       required String puuid,
       int numberOfMatches = 20,
-      matchType? type}) async {
+      MatchType? type}) async {
     if (numberOfMatches < 0 || numberOfMatches > 100) {
       numberOfMatches = 20;
     }
 
     switch (type) {
-      case matchType.ranked:
+      case MatchType.ranked:
         return await makeRequest(
             'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
             '$puuid'
             '/ids?type=ranked&start=0&count=$numberOfMatches&api_key=');
-      case matchType.normal:
+      case MatchType.normal:
         return await makeRequest(
             'https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/'
             '$puuid'

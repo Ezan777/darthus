@@ -2,7 +2,7 @@ class NameNotDefined implements Exception {}
 
 class Champion {
   final int _id, _skin;
-  String? _name;
+  final String? _name;
 
   Champion({required int id, String? name, int? skin})
       : _id = id,

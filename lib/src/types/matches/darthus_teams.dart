@@ -1,5 +1,4 @@
 import '../darthus_champion.dart';
-import 'darthus_teams.dart';
 import 'darthus_participant.dart';
 import '../darthus_summoner.dart';
 
