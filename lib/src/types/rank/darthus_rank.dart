@@ -15,23 +15,14 @@ class Rank {
         _wins = jsonRank['wins'],
         _losses = jsonRank['losses'];
 
-  String queueType() {
-    return _queueType;
-  }
+  String get queueType => _queueType;
 
-  String tier() {
-    return _tier;
-  }
+  String get tier => _tier;
 
-  int lp() {
-    return _lp;
-  }
+  int get lp => _lp;
 
-  String rank() {
-    return _rank;
-  }
+  String get rank => _rank;
 
-  double winPercentage() {
-    return double.parse(((_wins / (_wins + _losses)) * 100).toStringAsFixed(2));
-  }
+  double get winPercentage =>
+      double.parse(((_wins / (_wins + _losses)) * 100).toStringAsFixed(2));
 }

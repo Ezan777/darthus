@@ -21,11 +21,11 @@ void main() async {
     await summoner2.buildMatchAt(2);
     await summoner2.buildMatchAt(3);
     await summoner2.buildMatchAt(4);
-    
+
     print((summoner2.participantOfMatch(2)!.championInfo())['championName']);
     print(summoner2.puuid);
-    print('$summonerName is ${summoner.rankSolo()}');
-    print('$summoner2Name is ${summoner2.rankSolo()}');
+    print('$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
+    print('$summoner2Name is ${summoner2.rankSoloDuo == null ? "Unranked" : summoner2.rankSoloDuo!.tier}');
   } else {
     print('Invalid summoner name!');
   }

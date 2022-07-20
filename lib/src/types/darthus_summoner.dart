@@ -136,22 +136,13 @@ class Summoner {
     return true;
   }
 
-  /// Returns a string containing all information about player's solo/duo ranked
-  String rankSolo() {
-    if (_rankSoloDuo != null) {
-      return '${_rankSoloDuo!.tier()} ${_rankSoloDuo!.rank()} ${_rankSoloDuo!.lp()} lp and ${_rankSoloDuo!.winPercentage()}% win rate';
-    } else {
-      return 'Unranked';
-    }
-  }
+  /// Returns the Rank of the summoner in solo/duo queue. Returns null if
+  /// the summoner is unranked.
+  Rank? get rankSoloDuo => _rankSoloDuo;
 
-  String rankFlex() {
-    if (_rankFlex != null) {
-      return '${_rankFlex!.tier()} ${_rankFlex!.rank()} ${_rankFlex!.lp()} lp';
-    } else {
-      return 'Unranked';
-    }
-  }
+  /// Returns the rank of the summoner in flex queue. Returns null if the
+  /// summoner is unranked.
+  Rank? get rankFlex => _rankFlex;
 
   int get summonerLevel => _summonerLevel;
 
