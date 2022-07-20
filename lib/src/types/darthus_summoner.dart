@@ -12,6 +12,7 @@ class Summoner {
   late List<dynamic> _matchHistory;
   List<Match> _allMatches;
   Rank? _rankSoloDuo, _rankFlex;
+  bool _isBuilt;
 
   /// Constructor for [Summoner] class.
   ///
@@ -24,7 +25,8 @@ class Summoner {
   Summoner(String region, String summonerName)
       : _region = region,
         _summonerName = summonerName,
-        _allMatches = <Match>[] {
+        _allMatches = <Match>[],
+        _isBuilt = false {
     if (_region == 'euw1' ||
         _region == 'eun1' ||
         _region == 'ru' ||
@@ -74,6 +76,8 @@ class Summoner {
 
     _matchHistory =
         await ApiRequest.listOfMatches(region: _worldWideRegion, puuid: _puuid);
+
+    _isBuilt = true;
   }
 
   /// This function build all the matches in the match history. Be sure to have
@@ -84,7 +88,13 @@ class Summoner {
     }
   }
 
-  Future<void> getMatches({required int numberOfMatches, matchType? type}) async {
+  /// This method get the number of match codes given from servers and add
+  /// them to the [_matchHistory].
+  ///
+  /// This method does **not** build the matches, so after calling this method
+  /// remember to build matches.
+  Future<void> getMatches(
+      {required int numberOfMatches, matchType? type}) async {
     _matchHistory = await ApiRequest.listOfMatches(
         region: _worldWideRegion,
         puuid: _puuid,
@@ -92,13 +102,9 @@ class Summoner {
         type: type);
   }
 
-  List<dynamic> matchHistory() {
-    return _matchHistory;
-  }
+  List<dynamic> get matchHistory => _matchHistory;
 
-  List<Match> allMatches() {
-    return _allMatches;
-  }
+  List<Match> get allMatches => _allMatches;
 
   /// Builds the match located at the position [index] in the match history
   Future<void> buildMatchAt(int index) async {
@@ -147,20 +153,13 @@ class Summoner {
     }
   }
 
-  /// Returns the summoner's level
-  int summonerLevel() {
-    return _summonerLevel;
-  }
+  int get summonerLevel => _summonerLevel;
 
-  String summonerName() {
-    return _summonerName;
-  }
+  String get summonerName => _summonerName;
 
-  int iconId() {
-    return _iconId;
-  }
+  int get iconId => _iconId;
 
-  String puuid() {
-    return _puuid;
-  }
+  String get puuid => _puuid;
+
+  bool get isBuilt => _isBuilt;
 }

@@ -99,7 +99,7 @@ class Participant {
 
   /// Check if the participant is equal to [summoner]
   bool isEqualToTheSummoner(Summoner summoner) {
-    if (_puuid == summoner.puuid()) {
+    if (_puuid == summoner.puuid) {
       return true;
     } else {
       return false;
