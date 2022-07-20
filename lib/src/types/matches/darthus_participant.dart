@@ -91,7 +91,7 @@ class Participant {
   /// The keys of the map are: [championId], [championName], [championLevel]
   Map<String, dynamic> championInfo() {
     return <String, dynamic>{
-      'championId': champion.id(),
+      'championId': champion.id,
       'championName': champion.name(),
       'championLevel': _champLevel
     };

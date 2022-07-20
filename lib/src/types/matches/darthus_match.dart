@@ -20,6 +20,7 @@ class Match {
         _gameDuration = gameDuration,
         _teams = teams;
 
+  /// This constructor build the match from the json file obtained from Riot servers.
   factory Match.fromJson(Map<String, dynamic> matchJson, String region) {
     final matchId = matchJson['metadata']['matchId'];
     final gameDuration = matchJson['info']['gameDuration'];
@@ -31,10 +32,11 @@ class Match {
     ];
 
     return Match(
-        region: region,
-        matchId: matchId,
-        gameDuration: gameDuration,
-        teams: teams);
+      region: region,
+      matchId: matchId,
+      gameDuration: gameDuration,
+      teams: teams,
+    );
   }
 
   /// Build the match from the json returned by riot api
@@ -61,7 +63,7 @@ class Match {
   }
 
   /// Returns the game duration of the match in minutes with the following format
-  /// : minutes:seconds
+  /// m:s
   String gameDurationInMinutes() {
     if (_gameDuration != null) {
       final int minutes = _gameDuration! ~/ 60;

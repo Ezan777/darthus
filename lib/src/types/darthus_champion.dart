@@ -9,13 +9,9 @@ class Champion {
         _name = name,
         _skin = skin ?? 0;
 
-  int id() {
-    return _id;
-  }
+  int get id => _id;
 
-  int skin() {
-    return _skin;
-  }
+  int get skin => _skin;
 
   String name() {
     if (_name != null) {
