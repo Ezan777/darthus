@@ -1,6 +1,6 @@
 import 'package:darthus/darthus.dart';
 
-// This file is needed if you want to store the api key in another place so it 
+// This file is needed if you want to store the api key in another place so it
 // wont be uploaded to github.
 import 'api_key.dart';
 
@@ -24,8 +24,10 @@ void main() async {
 
     print((summoner2.participantOfMatch(2)!.championInfo())['championName']);
     print(summoner2.puuid);
-    print('$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
-    print('$summoner2Name is ${summoner2.rankSoloDuo == null ? "Unranked" : summoner2.rankSoloDuo!.tier}');
+    print(
+        '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
+    print(
+        '$summoner2Name is ${summoner2.rankSoloDuo == null ? "Unranked" : summoner2.rankSoloDuo!.tier}');
   } else {
     print('Invalid summoner name!');
   }
