@@ -54,6 +54,6 @@ class Team {
   }
 
   bool isWinner() {
-    return _participants[0].isWinner();
+    return _participants[0].isWinner;
   }
 }
