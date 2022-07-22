@@ -1,3 +1,5 @@
+import 'package:darthus/src/types/matches/darthus_participant.dart';
+
 import '../darthus_riot_api.dart';
 import 'rank/darthus_rank.dart';
 import 'matches/darthus_finished_match.dart';
@@ -115,7 +117,7 @@ class Summoner {
 
   /// Returns the participant that corresponds to the summoner in the match located
   /// at the given [index]. Returns null if the summoner didn't play in this match.
-  FinishedParticipant? participantOfMatch(int index) {
+  Participant? participantOfMatch(int index) {
     if (index > _allMatches.length - 1 || index < 0) {
       throw MatchDoesNotExists();
     } else {

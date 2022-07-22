@@ -24,9 +24,9 @@ class FinishedMatch extends Match {
     final gameDuration = matchJson['info']['gameDuration'];
     List<Team> teams = [
       Team((matchJson['info']['participants'] as List).sublist(0, 5),
-          matchJson['info']['teams'][0]['bans']),
+          matchJson['info']['teams'][0]['bans'], false, region),
       Team((matchJson['info']['participants'] as List).sublist(5, 10),
-          matchJson['info']['teams'][1]['bans']),
+          matchJson['info']['teams'][1]['bans'], false, region),
     ];
 
     return FinishedMatch(

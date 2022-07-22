@@ -1,4 +1,5 @@
 import 'package:darthus/darthus.dart';
+import 'package:darthus/src/types/matches/darthus_participant.dart';
 import 'package:darthus/src/types/matches/darthus_teams.dart';
 
 class MatchNotBuilt implements Exception {}
@@ -13,11 +14,11 @@ abstract class Match {
   Future<Match> buildFromApi();
 
   /// Returns the participant corresponding to the given [summoner].
-  /// If the summoner didn't play in this game it will return null.
-  FinishedParticipant? participantFromSummoner(Summoner summoner) {
+  /// If the summoner didn't play in this game or it's a live game it will return null.
+  Participant? participantFromSummoner(Summoner summoner) {
     if (teams != null) {
       bool found = false;
-      FinishedParticipant? participant;
+      Participant? participant;
       for (int i = 0; i < teams!.length && !found; ++i) {
         participant = teams![i].findSummoner(summoner);
         if (participant != null) {

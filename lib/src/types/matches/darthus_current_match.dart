@@ -15,9 +15,9 @@ class CurrentMatch extends Match {
     final gameId = jsonFile['gameId'];
     List<Team> teams = [
       Team((jsonFile['participants'] as List).sublist(0, 5),
-          jsonFile['bannedChampions']),
+          jsonFile['bannedChampions'], true, region),
       Team((jsonFile['participants'] as List).sublist(5, 10),
-          jsonFile['bannedChampions']),
+          jsonFile['bannedChampions'], true, region),
     ];
 
     return CurrentMatch(region: region, teams: teams, gameId: gameId);
