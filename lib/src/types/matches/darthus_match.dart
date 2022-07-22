@@ -30,4 +30,8 @@ abstract class Match {
       throw MatchNotBuilt;
     }
   }
+
+  Team get blueSideTeam =>
+      (teams != null ? teams!.first : throw MatchNotBuilt());
+  Team get redSideTeam => (teams != null ? teams!.last : throw MatchNotBuilt());
 }

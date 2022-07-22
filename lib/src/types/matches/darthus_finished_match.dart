@@ -45,22 +45,6 @@ class FinishedMatch extends Match {
     return FinishedMatch.fromJson(matchJson, super.region);
   }
 
-  Team blueSideTeam() {
-    if (super.teams != null) {
-      return super.teams!.first;
-    } else {
-      throw MatchNotBuilt();
-    }
-  }
-
-  Team redSideTeam() {
-    if (super.teams != null) {
-      return super.teams!.last;
-    } else {
-      throw MatchNotBuilt();
-    }
-  }
-
   /// Returns the game duration of the match in minutes with the following format
   /// m:s
   String gameDurationInMinutes() {
