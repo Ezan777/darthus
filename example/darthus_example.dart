@@ -25,12 +25,13 @@ void main() async {
 
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
     print(summoner2.encryptedSummonerId);
-    CurrentMatch.fromJson(
+    print(CurrentMatch.fromJson(
             jsonFile: (await ApiRequest.currentMatch(
                 summoner2.encryptedSummonerId, 'euw1')),
             region: 'euw1')
-        .participantFromSummoner(summoner2)!
-        .championInfo['championName'];
+        .redSideTeam
+        .participants()[3]
+        .championInfo['championId']);
     print(
         '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
     print(

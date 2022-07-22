@@ -11,17 +11,6 @@ class Champion {
       : _id = id,
         _skin = skin ?? 0;
 
-  Future<void> buildName() async {
-    final jsonChampions = await File('json/champion.json')
-        .readAsString()
-        .then((fileContents) => jsonDecode(fileContents));
-    jsonChampions['data'].entries.forEach((element) {
-      if (element.value['key'] == _id.toString()) {
-        _name = element.value['id'];
-      }
-    });
-  }
-
   int get id => _id;
 
   int get skin => _skin;

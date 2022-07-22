@@ -11,9 +11,7 @@ abstract class Participant {
             participantJson['spell1Id'] ?? participantJson['summoner1Id'],
         _summonerSpell2Id =
             participantJson['spell2Id'] ?? participantJson['summoner2Id'],
-        _champion = Champion(id: participantJson['championId']) {
-          _champion.buildName();
-        }
+        _champion = Champion(id: participantJson['championId']);
 
   /// Returns a list containing the ids of the two summoner's spell used by the player
   List<int> get summonerSpells => <int>[_summonerSpell1Id, _summonerSpell2Id];
@@ -25,6 +23,5 @@ abstract class Participant {
   /// The keys of the map are: [championId], [championName]
   Map<String, dynamic> get championInfo => <String, dynamic>{
         'championId': _champion.id,
-        'championName': _champion.name(),
       };
 }

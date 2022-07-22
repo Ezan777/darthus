@@ -10,11 +10,13 @@ class Team {
   List<Champion>? _bans;
   final bool _isLiveGame;
   final String _region;
+  final int _queueId;
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList,
-      bool isLiveGame, String region)
+      bool isLiveGame, String region, int queueId)
       : _isLiveGame = isLiveGame,
-        _region = region {
+        _region = region,
+        _queueId = queueId {
     if (!_isLiveGame) {
       _participants = [FinishedParticipant(participantJsonList[0])];
       if (bansJsonList.isNotEmpty) {
@@ -29,17 +31,17 @@ class Team {
         }
       }
     } else {
-      _participants = [CurrentParticipant(participantJsonList[0], _region)];
+      _participants = [CurrentParticipant(participantJsonList[0], _region, _queueId)];
       if (bansJsonList.isNotEmpty) {
         _bans = [Champion(id: bansJsonList[0]['championId'])];
         for (int i = 1; i < participantJsonList.length; ++i) {
-          _participants.add(CurrentParticipant(participantJsonList[i], region));
+          _participants.add(CurrentParticipant(participantJsonList[i], region, _queueId));
           _bans!.add(Champion(id: bansJsonList[i]['championId']));
         }
       } else {
         for (int i = 1; i < participantJsonList.length; ++i) {
           _participants
-              .add(CurrentParticipant(participantJsonList[i], _region));
+              .add(CurrentParticipant(participantJsonList[i], _region, _queueId));
         }
       }
     }
@@ -76,15 +78,16 @@ class Team {
     return _bans;
   }
 
-  /// Returns null if it is a live game, otherwise it will return all the kills 
+  /// Returns null if it is a live game, otherwise it will return all the kills
   /// of the team.
   int? totalKills() {
-    if(!_isLiveGame){
+    if (!_isLiveGame) {
       int totalKills = 0;
-    for (int i = 0; i < _participants.length; ++i) {
-      totalKills += (_participants[i] as FinishedParticipant).score()['kills'] ?? 0;
-    }
-    return totalKills;
+      for (int i = 0; i < _participants.length; ++i) {
+        totalKills +=
+            (_participants[i] as FinishedParticipant).score()['kills'] ?? 0;
+      }
+      return totalKills;
     } else {
       return null;
     }

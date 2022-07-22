@@ -5,7 +5,7 @@ import 'package:darthus/src/types/matches/darthus_participant.dart';
 /// Class [FinishedParticipant] is made to represent players of a single finished match, it will
 /// contains data of the players like kills, assists, deaths and others...
 class FinishedParticipant extends Participant {
-  final String _puuid;
+  final String _puuid, _champName;
   final bool _winner, _firstBloodKill, _pentakill;
   final int _totalDamageToChampions,
       _totalCs,
@@ -33,6 +33,7 @@ class FinishedParticipant extends Participant {
         _deaths = participantJson['deaths'],
         _assists = participantJson['assists'],
         _champLevel = participantJson['champLevel'],
+        _champName = participantJson['championName'],
         _goldEarned = participantJson['goldEarned'],
         _goldSpent = participantJson['goldSpent'],
         super(participantJson) {
@@ -73,7 +74,7 @@ class FinishedParticipant extends Participant {
   /// The keys of the map are: [championId], [championName], [championLevel]
   Map<String, dynamic> get championInfo => <String, dynamic>{
         'championId': super.championInfo['championId'],
-        'championName': super.championInfo['championName'],
+        'championName': _champName,
         'championLevel': _champLevel,
       };
 

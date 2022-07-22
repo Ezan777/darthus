@@ -5,16 +5,18 @@ import 'darthus_finished_participant.dart';
 import 'darthus_match.dart';
 
 class FinishedMatch extends Match {
-  late int? _gameDuration;
+  late int? _gameDuration, _queueId;
   final String _matchId;
 
   FinishedMatch(
       {required String region,
       required String matchId,
       int? gameDuration,
-      List<Team>? teams})
+      List<Team>? teams,
+      int? queueId})
       : _matchId = matchId,
         _gameDuration = gameDuration,
+        _queueId = queueId,
         super(region: region, teams: teams);
 
   /// This constructor build the match from the json file obtained from Riot servers.
@@ -22,11 +24,12 @@ class FinishedMatch extends Match {
       Map<String, dynamic> matchJson, String region) {
     final matchId = matchJson['metadata']['matchId'];
     final gameDuration = matchJson['info']['gameDuration'];
+    final queueId = matchJson['info']['queueId'];
     List<Team> teams = [
       Team((matchJson['info']['participants'] as List).sublist(0, 5),
-          matchJson['info']['teams'][0]['bans'], false, region),
+          matchJson['info']['teams'][0]['bans'], false, region, queueId),
       Team((matchJson['info']['participants'] as List).sublist(5, 10),
-          matchJson['info']['teams'][1]['bans'], false, region),
+          matchJson['info']['teams'][1]['bans'], false, region, queueId),
     ];
 
     return FinishedMatch(
@@ -34,6 +37,7 @@ class FinishedMatch extends Match {
       matchId: matchId,
       gameDuration: gameDuration,
       teams: teams,
+      queueId: queueId,
     );
   }
 

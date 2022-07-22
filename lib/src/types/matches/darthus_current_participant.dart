@@ -5,12 +5,12 @@ import '../rank/darthus_rank.dart';
 
 class CurrentParticipant extends Participant {
   final String _encryptedSummonerId, _region;
-  final int _profileIconId, _queueType;
+  final int _profileIconId, _queueId;
 
-  CurrentParticipant(Map<String, dynamic> participantJson, String region)
+  CurrentParticipant(Map<String, dynamic> participantJson, String region, int queueId)
       : _encryptedSummonerId = participantJson['summonerId'],
         _profileIconId = participantJson['profileIconId'],
-        _queueType = participantJson['gameQueueConfigId'],
+        _queueId = queueId,
         _region = region,
         super(participantJson);
 
@@ -22,7 +22,7 @@ class CurrentParticipant extends Participant {
   /// In ***all*** other cases it will return Rank object for Solo/Duo, it will return
   /// null if the player is unranked in Solo/Duo
   Future<Rank?> participantRank() async {
-    if (_queueType == 440) {
+    if (_queueId == 440) {
       return Rank(
           await ApiRequest.rankedFlexInfo(_region, _encryptedSummonerId));
     } else {
