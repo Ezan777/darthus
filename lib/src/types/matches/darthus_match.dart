@@ -14,10 +14,10 @@ abstract class Match {
 
   /// Returns the participant corresponding to the given [summoner].
   /// If the summoner didn't play in this game it will return null.
-  Participant? participantFromSummoner(Summoner summoner) {
+  FinishedParticipant? participantFromSummoner(Summoner summoner) {
     if (teams != null) {
       bool found = false;
-      Participant? participant;
+      FinishedParticipant? participant;
       for (int i = 0; i < teams!.length && !found; ++i) {
         participant = teams![i].findSummoner(summoner);
         if (participant != null) {

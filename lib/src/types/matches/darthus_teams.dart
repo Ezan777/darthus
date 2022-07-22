@@ -1,33 +1,33 @@
 import '../darthus_champion.dart';
-import 'darthus_participant.dart';
+import 'darthus_finished_participant.dart';
 import '../darthus_summoner.dart';
 
 class Team {
-  late List<Participant> _participants;
+  late List<FinishedParticipant> _participants;
   List<Champion>? _bans;
 
   Team(List<dynamic> participantJsonList, List<dynamic> bansJsonList) {
-    _participants = [Participant(participantJsonList[0])];
+    _participants = [FinishedParticipant(participantJsonList[0])];
     if (bansJsonList.isNotEmpty) {
       _bans = [Champion(id: bansJsonList[0]['championId'])];
       for (int i = 1; i < participantJsonList.length; ++i) {
-        _participants.add(Participant(participantJsonList[i]));
+        _participants.add(FinishedParticipant(participantJsonList[i]));
         _bans!.add(Champion(id: bansJsonList[i]['championId']));
       }
     } else {
       for (int i = 1; i < participantJsonList.length; ++i) {
-        _participants.add(Participant(participantJsonList[i]));
+        _participants.add(FinishedParticipant(participantJsonList[i]));
       }
     }
   }
 
-  List<Participant> participants() {
+  List<FinishedParticipant> participants() {
     return _participants;
   }
 
   /// Searches for the given [summoner] in the participants, if the summoners
   /// played in this team it returns the corresponding participant otherwise it returns null.
-  Participant? findSummoner(Summoner summoner) {
+  FinishedParticipant? findSummoner(Summoner summoner) {
     bool found = false;
     for (int i = 0; i < _participants.length && !found; ++i) {
       if (_participants[i].isEqualToTheSummoner(summoner)) {

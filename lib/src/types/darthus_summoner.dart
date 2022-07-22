@@ -1,7 +1,7 @@
 import '../darthus_riot_api.dart';
 import 'rank/darthus_rank.dart';
 import 'matches/darthus_finished_match.dart';
-import 'matches/darthus_participant.dart';
+import 'matches/darthus_finished_participant.dart';
 
 class MatchDoesNotExists implements Exception {}
 
@@ -115,7 +115,7 @@ class Summoner {
 
   /// Returns the participant that corresponds to the summoner in the match located
   /// at the given [index]. Returns null if the summoner didn't play in this match.
-  Participant? participantOfMatch(int index) {
+  FinishedParticipant? participantOfMatch(int index) {
     if (index > _allMatches.length - 1 || index < 0) {
       throw MatchDoesNotExists();
     } else {

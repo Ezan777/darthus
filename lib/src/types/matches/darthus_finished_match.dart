@@ -1,7 +1,7 @@
 import '../darthus_summoner.dart';
 import '../../darthus_riot_api.dart';
 import 'darthus_teams.dart';
-import 'darthus_participant.dart';
+import 'darthus_finished_participant.dart';
 import 'darthus_match.dart';
 
 class FinishedMatch extends Match {
