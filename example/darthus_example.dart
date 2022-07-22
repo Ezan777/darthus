@@ -27,12 +27,16 @@ void main() async {
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
     print(summoner2.encryptedSummonerId);
     String summoner2Tier = "";
-    try{
-        // In this case I am sure that the participant is not unranked, in other cases check for null value
-        summoner2Tier = (await ((await summoner2.currentMatch()).redSideTeam.participants()[3] as CurrentParticipant).participantRank())!.tier;
-      } on DataNotFound {
-        print("Player is not playing");
-      }
+    try {
+      // In this case I am sure that the participant is not unranked, in other cases check for null value
+      summoner2Tier = (await ((await summoner2.currentMatch())
+                  .redSideTeam
+                  .participants()[3] as CurrentParticipant)
+              .participantRank())!
+          .tier;
+    } on DataNotFound {
+      print("Player is not playing");
+    }
     print(summoner2Tier);
     print(
         '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');

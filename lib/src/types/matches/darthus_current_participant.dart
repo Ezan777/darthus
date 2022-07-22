@@ -7,7 +7,8 @@ class CurrentParticipant extends Participant {
   final String _encryptedSummonerId, _region;
   final int _profileIconId, _queueId;
 
-  CurrentParticipant(Map<String, dynamic> participantJson, String region, int queueId)
+  CurrentParticipant(
+      Map<String, dynamic> participantJson, String region, int queueId)
       : _encryptedSummonerId = participantJson['summonerId'],
         _profileIconId = participantJson['profileIconId'],
         _queueId = queueId,

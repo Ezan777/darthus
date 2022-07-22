@@ -31,17 +31,20 @@ class Team {
         }
       }
     } else {
-      _participants = [CurrentParticipant(participantJsonList[0], _region, _queueId)];
+      _participants = [
+        CurrentParticipant(participantJsonList[0], _region, _queueId)
+      ];
       if (bansJsonList.isNotEmpty) {
         _bans = [Champion(id: bansJsonList[0]['championId'])];
         for (int i = 1; i < participantJsonList.length; ++i) {
-          _participants.add(CurrentParticipant(participantJsonList[i], region, _queueId));
+          _participants.add(
+              CurrentParticipant(participantJsonList[i], region, _queueId));
           _bans!.add(Champion(id: bansJsonList[i]['championId']));
         }
       } else {
         for (int i = 1; i < participantJsonList.length; ++i) {
-          _participants
-              .add(CurrentParticipant(participantJsonList[i], _region, _queueId));
+          _participants.add(
+              CurrentParticipant(participantJsonList[i], _region, _queueId));
         }
       }
     }

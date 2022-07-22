@@ -166,6 +166,7 @@ class ApiRequest {
   /// it will throw DataNotFound exception
   static Future<Map<String, dynamic>> currentMatch(
       String encryptedSummonerId, String region) async {
-    return await (makeRequest('https://$region.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/$encryptedSummonerId?api_key='));
+    return await (makeRequest(
+        'https://$region.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/$encryptedSummonerId?api_key='));
   }
 }

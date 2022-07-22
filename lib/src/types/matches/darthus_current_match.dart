@@ -24,7 +24,11 @@ class CurrentMatch extends Match {
           jsonFile['bannedChampions'], true, region, queueId),
     ];
 
-    return CurrentMatch(region: region, teams: teams, gameId: gameId.toString(), queueId: queueId);
+    return CurrentMatch(
+        region: region,
+        teams: teams,
+        gameId: gameId.toString(),
+        queueId: queueId);
   }
 
   @override
