@@ -1,5 +1,6 @@
 import 'package:darthus/darthus.dart';
 import 'package:darthus/src/types/matches/darthus_current_match.dart';
+import 'package:darthus/src/types/matches/darthus_current_participant.dart';
 
 // This file is needed if you want to store the api key in another place so it
 // wont be uploaded to github.
@@ -25,13 +26,14 @@ void main() async {
 
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
     print(summoner2.encryptedSummonerId);
-    print(CurrentMatch.fromJson(
-            jsonFile: (await ApiRequest.currentMatch(
-                summoner2.encryptedSummonerId, 'euw1')),
-            region: 'euw1')
-        .redSideTeam
-        .participants()[3]
-        .championInfo['championId']);
+    String summoner2Tier = "";
+    try{
+        // In this case I am sure that the participant is not unranked, in other cases check for null value
+        summoner2Tier = (await ((await summoner2.currentMatch()).redSideTeam.participants()[3] as CurrentParticipant).participantRank())!.tier;
+      } on DataNotFound {
+        print("Player is not playing");
+      }
+    print(summoner2Tier);
     print(
         '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
     print(

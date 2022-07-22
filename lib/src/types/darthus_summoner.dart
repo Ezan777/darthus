@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:darthus/src/types/matches/darthus_current_match.dart';
 import 'package:darthus/src/types/matches/darthus_participant.dart';
 
