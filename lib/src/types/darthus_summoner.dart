@@ -1,6 +1,6 @@
 import '../darthus_riot_api.dart';
 import 'rank/darthus_rank.dart';
-import 'matches/darthus_match.dart';
+import 'matches/darthus_finished_match.dart';
 import 'matches/darthus_participant.dart';
 
 class MatchDoesNotExists implements Exception {}
@@ -10,7 +10,7 @@ class Summoner {
   late String _encryptedSummonerId, _puuid, _worldWideRegion;
   late int _summonerLevel, _iconId;
   late List<dynamic> _matchHistory;
-  final List<Match> _allMatches;
+  final List<FinishedMatch> _allMatches;
   Rank? _rankSoloDuo, _rankFlex;
   bool _isBuilt;
 
@@ -25,7 +25,7 @@ class Summoner {
   Summoner(String region, String summonerName)
       : _region = region,
         _summonerName = summonerName,
-        _allMatches = <Match>[],
+        _allMatches = <FinishedMatch>[],
         _isBuilt = false {
     if (_region == 'euw1' ||
         _region == 'eun1' ||
@@ -104,11 +104,11 @@ class Summoner {
 
   List<dynamic> get matchHistory => _matchHistory;
 
-  List<Match> get allMatches => _allMatches;
+  List<FinishedMatch> get allMatches => _allMatches;
 
   /// Builds the match located at the position [index] in the match history
   Future<void> buildMatchAt(int index) async {
-    _allMatches.add(Match.fromJson(
+    _allMatches.add(FinishedMatch.fromJson(
         await ApiRequest.allMatchInfo(_worldWideRegion, _matchHistory[index]),
         _worldWideRegion));
   }

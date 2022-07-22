@@ -5,12 +5,12 @@ import 'darthus_participant.dart';
 
 class MatchNotBuilt implements Exception {}
 
-class Match {
+class FinishedMatch {
   late List<Team>? _teams;
   late int? _gameDuration;
   final String _matchId, _region;
 
-  Match(
+  FinishedMatch(
       {required String region,
       required String matchId,
       int? gameDuration,
@@ -21,7 +21,8 @@ class Match {
         _teams = teams;
 
   /// This constructor build the match from the json file obtained from Riot servers.
-  factory Match.fromJson(Map<String, dynamic> matchJson, String region) {
+  factory FinishedMatch.fromJson(
+      Map<String, dynamic> matchJson, String region) {
     final matchId = matchJson['metadata']['matchId'];
     final gameDuration = matchJson['info']['gameDuration'];
     List<Team> teams = [
@@ -31,7 +32,7 @@ class Match {
           matchJson['info']['teams'][1]['bans']),
     ];
 
-    return Match(
+    return FinishedMatch(
       region: region,
       matchId: matchId,
       gameDuration: gameDuration,
@@ -40,10 +41,10 @@ class Match {
   }
 
   /// Build the match from the json returned by riot api
-  Future<Match> buildFromApi() async {
+  Future<FinishedMatch> buildFromApi() async {
     final matchJson = await ApiRequest.allMatchInfo(_region, _matchId);
 
-    return Match.fromJson(matchJson, _region);
+    return FinishedMatch.fromJson(matchJson, _region);
   }
 
   Team blueSideTeam() {
