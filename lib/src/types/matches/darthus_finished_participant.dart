@@ -1,17 +1,15 @@
 import 'package:darthus/darthus.dart';
 import 'package:darthus/src/types/darthus_champion.dart';
+import 'package:darthus/src/types/matches/darthus_participant.dart';
 
 /// Class [FinishedParticipant] is made to represent players of a single finished match, it will
 /// contains data of the players like kills, assists, deaths and others...
-class FinishedParticipant {
-  final String _puuid, _summonerName;
-  final Champion champion;
+class FinishedParticipant extends Participant {
+  final String _puuid;
   final bool _winner, _firstBloodKill, _pentakill;
   final int _totalDamageToChampions,
       _totalCs,
       _visionScore,
-      _summoner1Id,
-      _summoner2Id,
       _kills,
       _deaths,
       _assists,
@@ -23,26 +21,21 @@ class FinishedParticipant {
   /// [participantJson] is the json file containing data about a single participant
   FinishedParticipant(Map<String, dynamic> participantJson)
       : _puuid = participantJson['puuid'],
-        champion = Champion(
-            id: participantJson['championId'],
-            name: participantJson['championName']),
         _winner = participantJson['win'],
         _firstBloodKill = participantJson['firstBloodKill'],
         _pentakill = participantJson['pentaKills'] >= 1 ? true : false,
-        _summonerName = participantJson['summonerName'],
         _totalDamageToChampions =
             participantJson['totalDamageDealtToChampions'],
         _totalCs = participantJson['totalMinionsKilled'] +
             participantJson['neutralMinionsKilled'],
         _visionScore = participantJson['visionScore'],
-        _summoner1Id = participantJson['summoner1Id'],
-        _summoner2Id = participantJson['summoner2Id'],
         _kills = participantJson['kills'],
         _deaths = participantJson['deaths'],
         _assists = participantJson['assists'],
         _champLevel = participantJson['champLevel'],
         _goldEarned = participantJson['goldEarned'],
-        _goldSpent = participantJson['goldSpent'] {
+        _goldSpent = participantJson['goldSpent'],
+        super(participantJson) {
     _itemsId = [participantJson['item0']];
     for (int i = 1; i < 7; ++i) {
       _itemsId.add(participantJson['item$i']);
@@ -70,30 +63,19 @@ class FinishedParticipant {
     return <String, int>{'goldEarned': _goldEarned, 'goldSpent': _goldSpent};
   }
 
-  /// Returns a list containing the ids of the two summoner's spell used by the player
-  List<int> summonerSpells() {
-    return <int>[_summoner1Id, _summoner2Id];
-  }
-
-  String summonerName() {
-    return _summonerName;
-  }
-
   /// Returns a list containing the ids of the items bought by the player
-  List<int> itemsId() {
-    return _itemsId;
-  }
+  List<int> get itemsId => _itemsId;
+
+  @override
 
   /// Returns a map with information about the champion played.
   ///
   /// The keys of the map are: [championId], [championName], [championLevel]
-  Map<String, dynamic> championInfo() {
-    return <String, dynamic>{
-      'championId': champion.id,
-      'championName': champion.name(),
-      'championLevel': _champLevel
-    };
-  }
+  Map<String, dynamic> get championInfo => <String, dynamic>{
+        'championId': super.championInfo['championId'],
+        'championName': super.championInfo['championName'],
+        'championLevel': _champLevel,
+      };
 
   /// Check if the participant is equal to [summoner]
   bool isEqualToTheSummoner(Summoner summoner) {
