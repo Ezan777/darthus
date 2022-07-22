@@ -161,4 +161,11 @@ class ApiRequest {
     return (await allMatchInfo(region, matchCode))['info']['participants']
         [index];
   }
+
+  /// Returns the current match played for the given summonerId, if he is not currently playing
+  /// it will throw DataNotFound exception
+  static Future<Map<String, dynamic>> currentMatch(
+      String encryptedSummonerId, String region) async {
+    return await (makeRequest('https://$region.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/$encryptedSummonerId?api_key='));
+  }
 }

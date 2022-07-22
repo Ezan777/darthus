@@ -14,11 +14,11 @@ class CurrentParticipant extends Participant {
         _region = region,
         super(participantJson);
 
-  /// Return the Rank object of the participant. 
-  /// 
+  /// Return the Rank object of the participant.
+  ///
   /// If the game is a Ranked Flex
   /// it will return the object representing that type of rank for the player, null if unranked.
-  /// 
+  ///
   /// In ***all*** other cases it will return Rank object for Solo/Duo, it will return
   /// null if the player is unranked in Solo/Duo
   Future<Rank?> participantRank() async {

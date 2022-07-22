@@ -1,4 +1,5 @@
 import 'package:darthus/darthus.dart';
+import 'package:darthus/src/types/matches/darthus_current_match.dart';
 
 // This file is needed if you want to store the api key in another place so it
 // wont be uploaded to github.
@@ -6,7 +7,7 @@ import 'api_key.dart';
 
 void main() async {
   ApiRequest.setApiKey(key: myApiKey);
-  final String summonerName = 'zan777', summoner2Name = 'king kong irl';
+  final String summonerName = 'zan777', summoner2Name = 'secco groni';
   // Check if the summoner name is valid, in order to avoid connection errors
   if (await Summoner.summonerNameIsValid(summonerName)) {
     // Create the summoner object that at the moment it's empty
@@ -23,7 +24,13 @@ void main() async {
     await summoner2.buildMatchAt(4);
 
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
-    print(summoner2.puuid);
+    print(summoner2.encryptedSummonerId);
+    CurrentMatch.fromJson(
+            jsonFile: (await ApiRequest.currentMatch(
+                summoner2.encryptedSummonerId, 'euw1')),
+            region: 'euw1')
+        .participantFromSummoner(summoner2)!
+        .championInfo['championName'];
     print(
         '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
     print(
