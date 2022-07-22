@@ -2,13 +2,11 @@ import '../darthus_summoner.dart';
 import '../../darthus_riot_api.dart';
 import 'darthus_teams.dart';
 import 'darthus_participant.dart';
+import 'darthus_match.dart';
 
-class MatchNotBuilt implements Exception {}
-
-class FinishedMatch {
-  late List<Team>? _teams;
+class FinishedMatch extends Match {
   late int? _gameDuration;
-  final String _matchId, _region;
+  final String _matchId;
 
   FinishedMatch(
       {required String region,
@@ -16,9 +14,8 @@ class FinishedMatch {
       int? gameDuration,
       List<Team>? teams})
       : _matchId = matchId,
-        _region = region,
         _gameDuration = gameDuration,
-        _teams = teams;
+        super(region: region, teams: teams);
 
   /// This constructor build the match from the json file obtained from Riot servers.
   factory FinishedMatch.fromJson(
@@ -40,24 +37,25 @@ class FinishedMatch {
     );
   }
 
+  @override
   /// Build the match from the json returned by riot api
   Future<FinishedMatch> buildFromApi() async {
-    final matchJson = await ApiRequest.allMatchInfo(_region, _matchId);
+    final matchJson = await ApiRequest.allMatchInfo(super.region, _matchId);
 
-    return FinishedMatch.fromJson(matchJson, _region);
+    return FinishedMatch.fromJson(matchJson, super.region);
   }
 
   Team blueSideTeam() {
-    if (_teams != null) {
-      return _teams!.first;
+    if (super.teams != null) {
+      return super.teams!.first;
     } else {
       throw MatchNotBuilt();
     }
   }
 
   Team redSideTeam() {
-    if (_teams != null) {
-      return _teams!.last;
+    if (super.teams != null) {
+      return super.teams!.last;
     } else {
       throw MatchNotBuilt();
     }
@@ -72,25 +70,6 @@ class FinishedMatch {
       return '$minutes:$seconds';
     } else {
       throw MatchNotBuilt();
-    }
-  }
-
-  /// Returns the participant corresponding to the given [summoner]. If the summoner
-  /// didn't play in this game it will return null.
-  Participant? participantFromSummoner(Summoner summoner) {
-    if (_teams != null) {
-      bool found = false;
-      Participant? participant;
-      for (int i = 0; i < _teams!.length && !found; ++i) {
-        participant = _teams![i].findSummoner(summoner);
-        if (participant != null) {
-          found = true;
-        }
-      }
-
-      return participant;
-    } else {
-      throw MatchNotBuilt;
     }
   }
 
