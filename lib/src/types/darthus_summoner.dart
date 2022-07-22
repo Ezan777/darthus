@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:darthus/src/types/matches/darthus_current_match.dart';
 import 'package:darthus/src/types/matches/darthus_participant.dart';
 
 import '../darthus_riot_api.dart';
@@ -123,6 +126,12 @@ class Summoner {
     } else {
       return _allMatches[index].participantFromSummoner(this);
     }
+  }
+
+  Future<CurrentMatch> currentMatch() async {
+    return CurrentMatch.fromJson(
+        jsonFile: await ApiRequest.currentMatch(_encryptedSummonerId, _region),
+        region: _region);
   }
 
   /// Checks if the given [summonerName] is valid
