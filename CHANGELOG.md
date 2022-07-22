@@ -5,3 +5,9 @@
 ## 1.0.1
 
 - Now getters methods rankSoloDuo and rankFlex of Summoner class will return an object of type Rank instead of a String.
+
+## 1.2.0
+
+- Changed Match and Participant classes into abstract classes. Created CurrentMatch, CurrentParticipant, FinishedMatch and FinishedParticipant classes to implement live match feature.
+
+- Implemented Live Match feature, now from the summoner it is possible to obtain the live match, only if he is playing, if he is not a DataNotFound exception will be thrown.

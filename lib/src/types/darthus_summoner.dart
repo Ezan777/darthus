@@ -126,6 +126,8 @@ class Summoner {
     }
   }
 
+  /// Returns the CurrentMatch that the summoner is playing, if he is not playing
+  /// a DataNotFound exception will be thrown.
   Future<CurrentMatch> currentMatch() async {
     return CurrentMatch.fromJson(
         jsonFile: await ApiRequest.currentMatch(_encryptedSummonerId, _region),
