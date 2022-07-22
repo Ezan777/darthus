@@ -104,15 +104,9 @@ class Participant {
     }
   }
 
-  bool isWinner() {
-    return _winner;
-  }
+  bool get isWinner => _winner;
 
-  bool gotPentakill() {
-    return _pentakill;
-  }
+  bool get gotPentakill => _pentakill;
 
-  bool gotFirstBlood() {
-    return _firstBloodKill;
-  }
+  bool get gotFirstBlood => _firstBloodKill;
 }

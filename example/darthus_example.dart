@@ -6,7 +6,7 @@ import 'api_key.dart';
 
 void main() async {
   ApiRequest.setApiKey(key: myApiKey);
-  final String summonerName = 'zan777', summoner2Name = 'bondighidighi';
+  final String summonerName = 'zan777', summoner2Name = 'king kong irl';
   // Check if the summoner name is valid, in order to avoid connection errors
   if (await Summoner.summonerNameIsValid(summonerName)) {
     // Create the summoner object that at the moment it's empty
@@ -23,7 +23,7 @@ void main() async {
     await summoner2.buildMatchAt(4);
 
     print((summoner2.participantOfMatch(2)!.championInfo())['championName']);
-    print(summoner2.puuid);
+    print(summoner2.encryptedSummonerId);
     print(
         '$summonerName is ${summoner.rankSoloDuo == null ? "Unranked" : summoner.rankSoloDuo!.tier}');
     print(

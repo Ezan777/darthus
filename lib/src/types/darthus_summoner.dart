@@ -148,6 +148,8 @@ class Summoner {
 
   String get summonerName => _summonerName;
 
+  String get encryptedSummonerId => _encryptedSummonerId;
+
   int get iconId => _iconId;
 
   String get puuid => _puuid;
