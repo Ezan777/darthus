@@ -7,7 +7,7 @@ abstract class Match {
   late List<Team>? teams;
   final String region;
 
-  Match({required String this.region, List<Team>? this.teams});
+  Match({required this.region, this.teams});
 
   /// A method that will build match from data obtained from API
   Future<Match> buildFromApi();

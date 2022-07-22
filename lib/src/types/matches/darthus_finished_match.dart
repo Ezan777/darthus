@@ -38,6 +38,7 @@ class FinishedMatch extends Match {
   }
 
   @override
+
   /// Build the match from the json returned by riot api
   Future<FinishedMatch> buildFromApi() async {
     final matchJson = await ApiRequest.allMatchInfo(super.region, _matchId);
