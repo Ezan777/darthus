@@ -19,3 +19,7 @@
 ## 1.2.2
 
 - Added RateLimitExceeded exception on api request it will be thrown if the user exceed the request rate limit set by riot games for the api key.
+
+## 1.2.3 
+
+- Added some getters for FinishedParticipants
