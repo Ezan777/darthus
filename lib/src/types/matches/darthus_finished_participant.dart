@@ -86,6 +86,16 @@ class FinishedParticipant extends Participant {
     }
   }
 
+  int get kills => _kills;
+
+  int get deaths => _deaths;
+
+  int get assists => _assists;
+
+  int get goldEarned => _goldEarned;
+
+  int get minons => _totalCs;
+
   bool get isWinner => _winner;
 
   bool get gotPentakill => _pentakill;
