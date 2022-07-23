@@ -6,8 +6,7 @@ import 'darthus_teams.dart';
 class CurrentMatch extends Match {
   final String? _gameId;
 
-  CurrentMatch(
-      {required String region, List<Team>? teams, String? gameId})
+  CurrentMatch({required String region, List<Team>? teams, String? gameId})
       : _gameId = gameId,
         super(region: region, teams: teams);
 
@@ -23,9 +22,10 @@ class CurrentMatch extends Match {
     ];
 
     return CurrentMatch(
-        region: region,
-        teams: teams,
-        gameId: gameId.toString(),);
+      region: region,
+      teams: teams,
+      gameId: gameId.toString(),
+    );
   }
 
   @override

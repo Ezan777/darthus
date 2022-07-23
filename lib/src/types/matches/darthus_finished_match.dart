@@ -6,12 +6,12 @@ class FinishedMatch extends Match {
   late int? _gameDuration;
   final String _matchId;
 
-  FinishedMatch(
-      {required String region,
-      required String matchId,
-      int? gameDuration,
-      List<Team>? teams,})
-      : _matchId = matchId,
+  FinishedMatch({
+    required String region,
+    required String matchId,
+    int? gameDuration,
+    List<Team>? teams,
+  })  : _matchId = matchId,
         _gameDuration = gameDuration,
         super(region: region, teams: teams);
 
