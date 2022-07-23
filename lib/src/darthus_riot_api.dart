@@ -10,6 +10,8 @@ class DataNotFound implements Exception {}
 
 class BadRequest implements Exception {}
 
+class RateLimitExceeded implements Exception {}
+
 class ApiRequest {
   /// Set the api key for requests
   static void setApiKey({required String key}) {
@@ -50,6 +52,8 @@ class ApiRequest {
           throw BadRequest();
         case 404:
           throw DataNotFound();
+        case 429:
+          throw RateLimitExceeded();
         default:
           // Serious errors
           print('Serious error occurred with the http request, error code: $e');

@@ -15,3 +15,7 @@
 ## 1.2.1
 
 - Fixed a bug of the method getMatches in Summoner class, now _matchHistory will be empty before adding new matches.
+
+## 1.2.2
+
+- Added RateLimitExceeded exception on api request it will be thrown if the user exceed the request rate limit set by riot games for the api key.
