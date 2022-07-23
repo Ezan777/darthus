@@ -5,12 +5,10 @@ import 'darthus_teams.dart';
 
 class CurrentMatch extends Match {
   final String? _gameId;
-  late int? _queueId;
 
   CurrentMatch(
-      {required String region, List<Team>? teams, String? gameId, int? queueId})
+      {required String region, List<Team>? teams, String? gameId})
       : _gameId = gameId,
-        _queueId = queueId,
         super(region: region, teams: teams);
 
   factory CurrentMatch.fromJson(
@@ -27,8 +25,7 @@ class CurrentMatch extends Match {
     return CurrentMatch(
         region: region,
         teams: teams,
-        gameId: gameId.toString(),
-        queueId: queueId);
+        gameId: gameId.toString(),);
   }
 
   @override

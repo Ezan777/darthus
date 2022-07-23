@@ -1,5 +1,4 @@
 import 'package:darthus/darthus.dart';
-import 'package:darthus/src/types/darthus_champion.dart';
 import 'package:darthus/src/types/matches/darthus_participant.dart';
 
 /// Class [FinishedParticipant] is made to represent players of a single finished match, it will

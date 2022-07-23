@@ -4,7 +4,6 @@ import 'package:darthus/src/types/matches/darthus_participant.dart';
 import '../darthus_riot_api.dart';
 import 'rank/darthus_rank.dart';
 import 'matches/darthus_finished_match.dart';
-import 'matches/darthus_finished_participant.dart';
 
 class MatchDoesNotExists implements Exception {}
 

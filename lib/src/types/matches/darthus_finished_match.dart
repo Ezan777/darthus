@@ -1,22 +1,18 @@
-import '../darthus_summoner.dart';
 import '../../darthus_riot_api.dart';
 import 'darthus_teams.dart';
-import 'darthus_finished_participant.dart';
 import 'darthus_match.dart';
 
 class FinishedMatch extends Match {
-  late int? _gameDuration, _queueId;
+  late int? _gameDuration;
   final String _matchId;
 
   FinishedMatch(
       {required String region,
       required String matchId,
       int? gameDuration,
-      List<Team>? teams,
-      int? queueId})
+      List<Team>? teams,})
       : _matchId = matchId,
         _gameDuration = gameDuration,
-        _queueId = queueId,
         super(region: region, teams: teams);
 
   /// This constructor build the match from the json file obtained from Riot servers.
@@ -37,7 +33,6 @@ class FinishedMatch extends Match {
       matchId: matchId,
       gameDuration: gameDuration,
       teams: teams,
-      queueId: queueId,
     );
   }
 

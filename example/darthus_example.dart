@@ -1,5 +1,4 @@
 import 'package:darthus/darthus.dart';
-import 'package:darthus/src/types/matches/darthus_current_match.dart';
 import 'package:darthus/src/types/matches/darthus_current_participant.dart';
 
 // This file is needed if you want to store the api key in another place so it

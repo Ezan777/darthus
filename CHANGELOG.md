@@ -11,3 +11,7 @@
 - Changed Match and Participant classes into abstract classes. Created CurrentMatch, CurrentParticipant, FinishedMatch and FinishedParticipant classes to implement live match feature.
 
 - Implemented Live Match feature, now from the summoner it is possible to obtain the live match, only if he is playing, if he is not a DataNotFound exception will be thrown.
+
+## 1.2.1
+
+- Fixed a bug of the method getMatches in Summoner class, now _matchHistory will be empty before adding new matches.

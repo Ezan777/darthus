@@ -1,8 +1,6 @@
 import 'package:darthus/darthus.dart';
 import 'package:darthus/src/types/matches/darthus_participant.dart';
 
-import '../rank/darthus_rank.dart';
-
 class CurrentParticipant extends Participant {
   final String _encryptedSummonerId, _region;
   final int _profileIconId, _queueId;
