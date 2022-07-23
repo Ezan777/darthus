@@ -54,7 +54,9 @@ class Summoner {
   /// Build the summoner object using the [Summoner._summonerName] as starting point.
   ///
   /// Before using this function check if [summonerName] exist with static
-  /// function [summonerNameIsValid].
+  /// function [summonerNameIsValid], otherwise a DataNotFound exception will be thrown.
+  ///
+  /// The summoner will be built with a match history of 20 games by default.
   Future<void> buildSummoner() async {
     final Map<String, dynamic> summonerJson =
         await ApiRequest.summonerInformation(_region, _summonerName);
@@ -74,8 +76,6 @@ class Summoner {
             : _rankFlex = Rank(json);
       }
     }
-
-    Future.delayed(Duration(milliseconds: 500));
 
     _matchHistory =
         await ApiRequest.listOfMatches(region: _worldWideRegion, puuid: _puuid);
@@ -98,6 +98,7 @@ class Summoner {
   /// remember to build matches.
   Future<void> getMatches(
       {required int numberOfMatches, MatchType? type}) async {
+    _matchHistory.clear();
     _matchHistory = await ApiRequest.listOfMatches(
         region: _worldWideRegion,
         puuid: _puuid,
