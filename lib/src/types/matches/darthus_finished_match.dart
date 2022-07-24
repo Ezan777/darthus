@@ -85,7 +85,7 @@ class FinishedMatch extends Match {
   int gameDurationInSeconds() {
     return _gameDuration ?? (throw MatchNotBuilt);
   }
-  
+
   /// Returns the matchType as a String. It works with normal matches like Ranked
   /// Solo/Duo, Flex, blind pick, draft and Aram, if it returns null it means that the match
   /// was of a special and unsual type

@@ -23,3 +23,7 @@
 ## 1.2.3 
 
 - Added some getters for FinishedParticipants
+
+## 1.2.4
+
+- Added a method to retrieve matchType from a FinishedMatch
