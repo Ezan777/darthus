@@ -5,14 +5,17 @@ import 'darthus_match.dart';
 class FinishedMatch extends Match {
   late int? _gameDuration;
   final String _matchId;
+  String? _matchType;
 
-  FinishedMatch({
-    required String region,
-    required String matchId,
-    int? gameDuration,
-    List<Team>? teams,
-  })  : _matchId = matchId,
+  FinishedMatch(
+      {required String region,
+      required String matchId,
+      int? gameDuration,
+      List<Team>? teams,
+      String? matchType})
+      : _matchId = matchId,
         _gameDuration = gameDuration,
+        _matchType = matchType,
         super(region: region, teams: teams);
 
   /// This constructor build the match from the json file obtained from Riot servers.
@@ -27,12 +30,34 @@ class FinishedMatch extends Match {
       Team((matchJson['info']['participants'] as List).sublist(5, 10),
           matchJson['info']['teams'][1]['bans'], false, region, queueId),
     ];
+    final String? matchType;
+    switch (queueId) {
+      case (400):
+        matchType = "Draft";
+        break;
+      case (420):
+        matchType = "Solo/Duo";
+        break;
+      case (430):
+        matchType = "Blind pick";
+        break;
+      case (440):
+        matchType = "Flex";
+        break;
+      case (450):
+        matchType = "Aram";
+        break;
+      default:
+        matchType = null;
+        break;
+    }
 
     return FinishedMatch(
       region: region,
       matchId: matchId,
       gameDuration: gameDuration,
       teams: teams,
+      matchType: matchType,
     );
   }
 
@@ -60,4 +85,9 @@ class FinishedMatch extends Match {
   int gameDurationInSeconds() {
     return _gameDuration ?? (throw MatchNotBuilt);
   }
+  
+  /// Returns the matchType as a String. It works with normal matches like Ranked
+  /// Solo/Duo, Flex, blind pick, draft and Aram, if it returns null it means that the match
+  /// was of a special and unsual type
+  String? get matchType => _matchType;
 }
