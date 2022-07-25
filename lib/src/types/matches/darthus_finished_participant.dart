@@ -63,7 +63,9 @@ class FinishedParticipant extends Participant {
     return <String, int>{'goldEarned': _goldEarned, 'goldSpent': _goldSpent};
   }
 
-  /// Returns a list containing the ids of the items bought by the player
+  /// Returns a list containing the ids of the items bought by the player, the
+  /// last item in the list it's the trinket. If an id is equal to 0 it means that
+  /// the item's slot was empty.
   List<int> get itemsId => _itemsId;
 
   @override

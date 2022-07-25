@@ -24,6 +24,7 @@ void main() async {
     await summoner2.buildMatchAt(4);
 
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
+    print((summoner2.participantOfMatch(2) as FinishedParticipant).itemsId.toString());
     print(summoner2.encryptedSummonerId);
     String summoner2Tier = "";
     try {
