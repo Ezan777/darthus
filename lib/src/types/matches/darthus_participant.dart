@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import '../darthus_champion.dart';
 
 abstract class Participant {
@@ -15,6 +18,15 @@ abstract class Participant {
 
   /// Returns a list containing the ids of the two summoner's spell used by the player
   List<int> get summonerSpells => <int>[_summonerSpell1Id, _summonerSpell2Id];
+
+  /// Returns the names of the summoner spells used by the summoner
+  Future<List<String>> summonerSpellsNames() async {
+    final jsonString = await File("json/summoner.json").readAsString();
+    final json = jsonDecode(jsonString)["data"]
+        .map((String key, spell) => MapEntry(spell["key"], spell["id"]));
+
+    return <String>[json["$_summonerSpell1Id"], json["$_summonerSpell2Id"]];
+  }
 
   String get summonerName => _summonerName;
 

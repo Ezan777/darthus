@@ -27,3 +27,7 @@
 ## 1.2.4
 
 - Added a method to retrieve matchType from a FinishedMatch
+
+## 1.2.5
+
+- Added a method to get the summoner spells names from participant
