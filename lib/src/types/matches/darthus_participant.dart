@@ -21,7 +21,8 @@ abstract class Participant {
 
   /// Returns the names of the summoner spells used by the summoner
   Future<List<String>> summonerSpellsNames() async {
-    final jsonString = await File("json/summoner.json").readAsString();
+    final jsonString =
+        await File("lib/assets/json/summoner.json").readAsString();
     final json = jsonDecode(jsonString)["data"]
         .map((String key, spell) => MapEntry(spell["key"], spell["id"]));
 

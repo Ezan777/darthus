@@ -1,12 +1,14 @@
 name: darthus
 description: Darthus is a package that aims to give an easy access to League of Legends official API for dart's users.
-version: 1.2.5
+version: 1.2.7
 homepage: https://www.github.com/Ezan777/darthus
 
 environment:
   sdk: '>=2.17.3 <3.0.0'
 
-# dependencies:
+dependencies:
+assets:
+- lib/json/
 #   path: ^1.8.0
 
 dev_dependencies:

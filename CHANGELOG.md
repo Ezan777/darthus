@@ -31,3 +31,11 @@
 ## 1.2.5
 
 - Added a method to get the summoner spells names from participant
+
+## 1.2.6
+
+- Added assets
+
+## 1.2.7
+
+- Assets didn't work, now this bug should be fixed
