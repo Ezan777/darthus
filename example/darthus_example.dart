@@ -24,7 +24,6 @@ void main() async {
     await summoner2.buildMatchAt(4);
 
     print((summoner2.participantOfMatch(2)!.championInfo)['championName']);
-    print((await summoner2.participantOfMatch(1)!.summonerSpellsNames())[0]);
     print((summoner2.participantOfMatch(2) as FinishedParticipant)
         .itemsId
         .toString());

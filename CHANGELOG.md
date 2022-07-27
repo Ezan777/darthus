@@ -38,4 +38,28 @@
 
 ## 1.2.7
 
-- Assets didn't work, now this bug should be fixed
+- Assets didn't work, tring to fix
+
+## 1.2.8
+
+- Assets should work now
+
+## 1.2.9
+
+- Version 1.2.8 crashed
+
+## 1.2.10
+
+- Finally solved Assets problem
+
+## 1.2.11
+
+- Bugs fixed
+
+## 1.2.12
+
+- There is no way to achieve what I was trying to do so now the summonerSpellsNames now require a path to json file as parameter.
+
+## 1.2.13
+
+- Since is impossible to parse local json files in the package while it's executing inside the application I removed summonerSpellsNames method. Now if you want summoner spells names you have to parse Riot's json by your own and use the summoner spells ids as identifier.
