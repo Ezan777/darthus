@@ -67,3 +67,7 @@
 ## 1.2.14
 
 - Added some attributes and their getters to the FinishedParticipant class, these attributes concern the damage dealt and taken by the participant.
+
+## 1.2.15
+
+- Fixed some bugs

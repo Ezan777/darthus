@@ -22,7 +22,7 @@ class FinishedParticipant extends Participant {
       _physicalDamageTaken,
       _trueDamageDealtToChampions,
       _trueDamageTaken,
-      _selfMitigatedDamage;
+      _damageSelfMitgated;
   late List<int> _itemsId;
 
   /// [participantJson] is the json file containing data about a single participant
@@ -53,7 +53,7 @@ class FinishedParticipant extends Participant {
         _trueDamageDealtToChampions =
             participantJson["trueDamageDealtToChampions"],
         _trueDamageTaken = participantJson["trueDamageTaken"],
-        _selfMitigatedDamage = participantJson["selfMitigatedDamage"],
+        _damageSelfMitgated = participantJson["damageSelfMitgated"],
         super(participantJson) {
     _itemsId = [participantJson['item0']];
     for (int i = 1; i < 7; ++i) {
@@ -144,5 +144,5 @@ class FinishedParticipant extends Participant {
   int get totalDamageTaken =>
       (_magicDamageTaken + _physicalDamageTaken + _trueDamageTaken);
 
-  int get selfMitigatedDamage => _selfMitigatedDamage;
+  int get damageSelfMitgated => _damageSelfMitgated;
 }
