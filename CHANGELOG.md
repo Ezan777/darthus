@@ -63,3 +63,7 @@
 ## 1.2.13
 
 - Since is impossible to parse local json files in the package while it's executing inside the application I removed summonerSpellsNames method. Now if you want summoner spells names you have to parse Riot's json by your own and use the summoner spells ids as identifier.
+
+## 1.2.14
+
+- Added some attributes and their getters to the FinishedParticipant class, these attributes concern the damage dealt and taken by the participant.

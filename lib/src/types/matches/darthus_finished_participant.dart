@@ -14,7 +14,15 @@ class FinishedParticipant extends Participant {
       _assists,
       _champLevel,
       _goldEarned,
-      _goldSpent;
+      _goldSpent,
+      _damageDealtToObjectives,
+      _magicDamageDealtToChampions,
+      _magicDamageTaken,
+      _physicalDamageDealtToChampions,
+      _physicalDamageTaken,
+      _trueDamageDealtToChampions,
+      _trueDamageTaken,
+      _selfMitigatedDamage;
   late List<int> _itemsId;
 
   /// [participantJson] is the json file containing data about a single participant
@@ -35,6 +43,17 @@ class FinishedParticipant extends Participant {
         _champName = participantJson['championName'],
         _goldEarned = participantJson['goldEarned'],
         _goldSpent = participantJson['goldSpent'],
+        _damageDealtToObjectives = participantJson["damageDealtToObjectives"],
+        _magicDamageDealtToChampions =
+            participantJson["magicDamageDealtToChampions"],
+        _magicDamageTaken = participantJson["magicDamageTaken"],
+        _physicalDamageDealtToChampions =
+            participantJson["physicalDamageDealtToChampions"],
+        _physicalDamageTaken = participantJson["physicalDamageTaken"],
+        _trueDamageDealtToChampions =
+            participantJson["trueDamageDealtToChampions"],
+        _trueDamageTaken = participantJson["trueDamageTaken"],
+        _selfMitigatedDamage = participantJson["selfMitigatedDamage"],
         super(participantJson) {
     _itemsId = [participantJson['item0']];
     for (int i = 1; i < 7; ++i) {
@@ -103,4 +122,27 @@ class FinishedParticipant extends Participant {
   bool get gotPentakill => _pentakill;
 
   bool get gotFirstBlood => _firstBloodKill;
+
+  int get damageDealtToObjectives => _damageDealtToObjectives;
+
+  int get magicDamageDealtToChampions => _magicDamageDealtToChampions;
+
+  int get magicDamageTaken => _magicDamageTaken;
+
+  int get physicalDamageDealtToChampions => _physicalDamageDealtToChampions;
+
+  int get physicalDamageTaken => _physicalDamageTaken;
+
+  int get trueDamageDelatToChampions => _trueDamageDealtToChampions;
+
+  int get trueDamageTaken => _trueDamageTaken;
+
+  int get totalDamageDealtToChampions => (_magicDamageDealtToChampions +
+      _physicalDamageDealtToChampions +
+      _trueDamageDealtToChampions);
+
+  int get totalDamageTaken =>
+      (_magicDamageTaken + _physicalDamageTaken + _trueDamageTaken);
+
+  int get selfMitigatedDamage => _selfMitigatedDamage;
 }
