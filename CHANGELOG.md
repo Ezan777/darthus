@@ -79,3 +79,7 @@
 ## 1.2.17
 
 - Added some getters to retrieve max damage dealt, taken and self mitgated by a FinishedTeam class derived from Team class
+
+## 1.2.18
+
+- Adjusted exports

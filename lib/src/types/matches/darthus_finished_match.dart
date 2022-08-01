@@ -1,4 +1,4 @@
-import '../../darthus_riot_api.dart';
+import 'package:darthus/darthus.dart';
 import 'darthus_team.dart';
 import 'darthus_match.dart';
 
@@ -90,4 +90,92 @@ class FinishedMatch extends Match {
   /// Solo/Duo, Flex, blind pick, draft and Aram, if it returns null it means that the match
   /// was of a special and unsual type
   String? get matchType => _matchType;
+
+  int maxDamageDealtToChampions() {
+    int maxBlueSide = (blueSideTeam.participants()[0] as FinishedParticipant)
+        .totalDamageDealtToChampions;
+
+    int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
+    .totalDamageDealtToChampions;
+
+    for (int i = 1; i < 5; ++i) {
+      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+
+      if (blueParticipant.totalDamageDealtToChampions > maxBlueSide) {
+        maxBlueSide = blueParticipant.totalDamageDealtToChampions;
+      }
+      if (redParticipant.totalDamageDealtToChampions > maxBlueSide) {
+        maxRedSide = redParticipant.totalDamageDealtToChampions;
+      }
+    }
+
+    return maxBlueSide > maxRedSide ? maxBlueSide : maxRedSide;
+  }
+
+  int maxDamageDealtToObjectives() {
+    int maxBlueSide = (blueSideTeam.participants()[0] as FinishedParticipant)
+        .damageDealtToObjectives;
+
+    int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
+    .damageDealtToObjectives;
+
+    for (int i = 1; i < 5; ++i) {
+      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+
+      if (blueParticipant.damageDealtToObjectives > maxBlueSide) {
+        maxBlueSide = blueParticipant.damageDealtToObjectives;
+      }
+      if (redParticipant.damageDealtToObjectives > maxBlueSide) {
+        maxRedSide = redParticipant.damageDealtToObjectives;
+      }
+    }
+
+    return maxBlueSide > maxRedSide ? maxBlueSide : maxRedSide;
+  }
+
+  int maxDamageTaken() {
+    int maxBlueSide = (blueSideTeam.participants()[0] as FinishedParticipant)
+        .totalDamageTaken;
+
+    int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
+    .totalDamageTaken;
+
+    for (int i = 1; i < 5; ++i) {
+      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+
+      if (blueParticipant.totalDamageTaken > maxBlueSide) {
+        maxBlueSide = blueParticipant.totalDamageTaken;
+      }
+      if (redParticipant.totalDamageTaken > maxBlueSide) {
+        maxRedSide = redParticipant.totalDamageTaken;
+      }
+    }
+
+    return maxBlueSide > maxRedSide ? maxBlueSide : maxRedSide;
+  }
+
+  int maxDamageSelfMitigated() {
+    int maxBlueSide = (blueSideTeam.participants()[0] as FinishedParticipant)
+        .damageSelfMitgated;
+
+    int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
+    .damageSelfMitgated;
+
+    for (int i = 1; i < 5; ++i) {
+      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+
+      if (blueParticipant.damageSelfMitgated > maxBlueSide) {
+        maxBlueSide = blueParticipant.damageSelfMitgated;
+      }
+      if (redParticipant.damageSelfMitgated > maxBlueSide) {
+        maxRedSide = redParticipant.damageSelfMitgated;
+      }
+    }
+
+    return maxBlueSide > maxRedSide ? maxBlueSide : maxRedSide;
+  }
 }

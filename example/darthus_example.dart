@@ -24,7 +24,7 @@ void main() async {
     await summoner2.buildMatchAt(2);
     await summoner2.buildMatchAt(3);
     await summoner2.buildMatchAt(4);
-
+    
     print((summoner.participantOfMatch(0) as FinishedParticipant)
         .totalDamageDealtToChampions
         .toString());
