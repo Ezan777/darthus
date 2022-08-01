@@ -83,3 +83,7 @@
 ## 1.2.18
 
 - Adjusted exports
+
+## 1.2.19
+
+- Due to some problems with tyoe casting Finished Team class has been deleted and max damages methods are now inside of FInished Match class.

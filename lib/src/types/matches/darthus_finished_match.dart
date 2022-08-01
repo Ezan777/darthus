@@ -96,11 +96,13 @@ class FinishedMatch extends Match {
         .totalDamageDealtToChampions;
 
     int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
-    .totalDamageDealtToChampions;
+        .totalDamageDealtToChampions;
 
     for (int i = 1; i < 5; ++i) {
-      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
-      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant blueParticipant =
+          blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant =
+          redSideTeam.participants()[i] as FinishedParticipant;
 
       if (blueParticipant.totalDamageDealtToChampions > maxBlueSide) {
         maxBlueSide = blueParticipant.totalDamageDealtToChampions;
@@ -118,11 +120,13 @@ class FinishedMatch extends Match {
         .damageDealtToObjectives;
 
     int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
-    .damageDealtToObjectives;
+        .damageDealtToObjectives;
 
     for (int i = 1; i < 5; ++i) {
-      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
-      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant blueParticipant =
+          blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant =
+          redSideTeam.participants()[i] as FinishedParticipant;
 
       if (blueParticipant.damageDealtToObjectives > maxBlueSide) {
         maxBlueSide = blueParticipant.damageDealtToObjectives;
@@ -139,12 +143,14 @@ class FinishedMatch extends Match {
     int maxBlueSide = (blueSideTeam.participants()[0] as FinishedParticipant)
         .totalDamageTaken;
 
-    int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
-    .totalDamageTaken;
+    int maxRedSide =
+        (redSideTeam.participants()[0] as FinishedParticipant).totalDamageTaken;
 
     for (int i = 1; i < 5; ++i) {
-      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
-      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant blueParticipant =
+          blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant =
+          redSideTeam.participants()[i] as FinishedParticipant;
 
       if (blueParticipant.totalDamageTaken > maxBlueSide) {
         maxBlueSide = blueParticipant.totalDamageTaken;
@@ -162,11 +168,13 @@ class FinishedMatch extends Match {
         .damageSelfMitgated;
 
     int maxRedSide = (redSideTeam.participants()[0] as FinishedParticipant)
-    .damageSelfMitgated;
+        .damageSelfMitgated;
 
     for (int i = 1; i < 5; ++i) {
-      FinishedParticipant blueParticipant = blueSideTeam.participants()[i] as FinishedParticipant;
-      FinishedParticipant redParticipant = redSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant blueParticipant =
+          blueSideTeam.participants()[i] as FinishedParticipant;
+      FinishedParticipant redParticipant =
+          redSideTeam.participants()[i] as FinishedParticipant;
 
       if (blueParticipant.damageSelfMitgated > maxBlueSide) {
         maxBlueSide = blueParticipant.damageSelfMitgated;
