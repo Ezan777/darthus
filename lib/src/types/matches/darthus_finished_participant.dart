@@ -123,6 +123,8 @@ class FinishedParticipant extends Participant {
 
   bool get gotFirstBlood => _firstBloodKill;
 
+  int get visionScore => _visionScore;
+
   int get damageDealtToObjectives => _damageDealtToObjectives;
 
   int get magicDamageDealtToChampions => _magicDamageDealtToChampions;
