@@ -71,3 +71,7 @@
 ## 1.2.15
 
 - Fixed some bugs
+
+## 1.2.16
+
+- Fixed some bugs

@@ -1,6 +1,6 @@
 import 'package:darthus/darthus.dart';
 import 'package:darthus/src/types/matches/darthus_participant.dart';
-import 'package:darthus/src/types/matches/darthus_teams.dart';
+import 'package:darthus/src/types/matches/darthus_team.dart';
 
 class MatchNotBuilt implements Exception {}
 

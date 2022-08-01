@@ -1,7 +1,7 @@
 import 'package:darthus/darthus.dart';
 
 import 'darthus_match.dart';
-import 'darthus_teams.dart';
+import 'darthus_team.dart';
 
 class CurrentMatch extends Match {
   final String? _gameId;

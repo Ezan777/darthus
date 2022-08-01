@@ -1,5 +1,5 @@
 import '../../darthus_riot_api.dart';
-import 'darthus_teams.dart';
+import 'darthus_team.dart';
 import 'darthus_match.dart';
 
 class FinishedMatch extends Match {

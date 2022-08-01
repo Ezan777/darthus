@@ -53,7 +53,7 @@ class FinishedParticipant extends Participant {
         _trueDamageDealtToChampions =
             participantJson["trueDamageDealtToChampions"],
         _trueDamageTaken = participantJson["trueDamageTaken"],
-        _damageSelfMitgated = participantJson["damageSelfMitgated"],
+        _damageSelfMitgated = participantJson["damageSelfMitigated"],
         super(participantJson) {
     _itemsId = [participantJson['item0']];
     for (int i = 1; i < 7; ++i) {
