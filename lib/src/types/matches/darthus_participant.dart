@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import '../darthus_champion.dart';
 
 abstract class Participant {
