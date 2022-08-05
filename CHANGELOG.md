@@ -91,3 +91,11 @@
 ## 1.2.20
 
 - Added getter for vision score from FinishedParticipant class
+
+## 1.3.0
+
+- Added the feature to redirect requests to another server. I did this to avoid reverse engineering leaks on my api key. You can redirect requests to another server using the static function setRedirectUrl of ApiRequest class
+
+## 1.3.1
+
+- Changed socket exception handling

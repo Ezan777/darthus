@@ -2,7 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-late String apiKey;
+String? apiKey;
+
+/// If you want to make your request to a personal server that after redirect
+/// the request to riot's servers use this. It's useful if you don't wanna
+/// reveal riot's api key.
+///
+/// If redirectUrl is not null the apiKey will be ignored.
+String? redirectUrl;
 
 enum MatchType { ranked, normal }
 
@@ -13,6 +20,10 @@ class BadRequest implements Exception {}
 class RateLimitExceeded implements Exception {}
 
 class ApiRequest {
+  static void setRedirectUrl({required String url}) {
+    redirectUrl = url;
+  }
+
   /// Set the api key for requests
   static void setApiKey({required String key}) {
     apiKey = key;
@@ -25,27 +36,46 @@ class ApiRequest {
   /// crash.
   static Future<dynamic> makeRequest(String url) async {
     try {
-      final HttpClientRequest request =
-          await HttpClient().getUrl(Uri.parse(url + apiKey));
-      final HttpClientResponse response = await request.close();
-      if (response.statusCode != 200) {
-        throw response.statusCode;
-      } else {
-        final jsonFiles =
-            await response.transform(const Utf8Decoder()).toList();
-        String jsonString = '';
-        for (int i = 0; i < jsonFiles.length; ++i) {
-          jsonString += jsonFiles[i];
+      if (redirectUrl == null) {
+        assert(apiKey != null);
+        final HttpClientRequest request =
+            await HttpClient().getUrl(Uri.parse(url + apiKey!));
+        final HttpClientResponse response = await request.close();
+        if (response.statusCode != 200) {
+          throw response.statusCode;
+        } else {
+          final jsonFiles =
+              await response.transform(const Utf8Decoder()).toList();
+          String jsonString = '';
+          for (int i = 0; i < jsonFiles.length; ++i) {
+            jsonString += jsonFiles[i];
+          }
+          final values = jsonDecode(jsonString);
+          return values;
         }
-        final values = jsonDecode(jsonString);
-        return values;
+      } else {
+        final HttpClientRequest request =
+            await HttpClient().getUrl(Uri.parse(redirectUrl! + url));
+        final HttpClientResponse response = await request.close();
+        if (response.statusCode != 200) {
+          throw response.statusCode;
+        } else {
+          final jsonFiles =
+              await response.transform(const Utf8Decoder()).toList();
+          String jsonString = '';
+          for (int i = 0; i < jsonFiles.length; ++i) {
+            jsonString += jsonFiles[i];
+          }
+          final values = jsonDecode(jsonString);
+          return values;
+        }
       }
     } on SocketException {
-      print("Socket exception! Closing the program...");
-      exit(1);
+      print("Socket exception!");
+      rethrow;
     } on FormatException {
-      print("Format exception! Closing the program...");
-      exit(1);
+      print("Format exception!");
+      rethrow;
     } catch (e) {
       switch (e as int) {
         case 400:

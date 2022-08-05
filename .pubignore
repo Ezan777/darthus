@@ -9,3 +9,4 @@ build/
 
 #Api key
 example/api_key.dart
+example/redirect_url.dart
