@@ -11,6 +11,8 @@ String? apiKey;
 /// If redirectUrl is not null the apiKey will be ignored.
 String? redirectUrl;
 
+Function(String riotRequestUrl)? httpCallable;
+
 enum MatchType { ranked, normal }
 
 class DataNotFound implements Exception {}
@@ -29,6 +31,11 @@ class ApiRequest {
     apiKey = key;
   }
 
+  static void setHttpCallable(
+      {required Function(String riotRequestUrl) callFunction}) {
+    httpCallable = callFunction;
+  }
+
   /// Returns a decoded json file containing the result of the http request
   /// made to the given url; the riot api key is added automatically so don't
   /// insert it in the url. Throws exceptions for bad requests and data not found in
@@ -36,7 +43,7 @@ class ApiRequest {
   /// crash.
   static Future<dynamic> makeRequest(String url) async {
     try {
-      if (redirectUrl == null) {
+      if (redirectUrl == null && httpCallable == null) {
         assert(apiKey != null);
         final HttpClientRequest request =
             await HttpClient().getUrl(Uri.parse(url + apiKey!));
@@ -54,20 +61,24 @@ class ApiRequest {
           return values;
         }
       } else {
-        final HttpClientRequest request =
-            await HttpClient().getUrl(Uri.parse(redirectUrl! + url));
-        final HttpClientResponse response = await request.close();
-        if (response.statusCode != 200) {
-          throw response.statusCode;
-        } else {
-          final jsonFiles =
-              await response.transform(const Utf8Decoder()).toList();
-          String jsonString = '';
-          for (int i = 0; i < jsonFiles.length; ++i) {
-            jsonString += jsonFiles[i];
+        if (redirectUrl != null && httpCallable == null) {
+          final HttpClientRequest request =
+              await HttpClient().getUrl(Uri.parse(redirectUrl! + url));
+          final HttpClientResponse response = await request.close();
+          if (response.statusCode != 200) {
+            throw response.statusCode;
+          } else {
+            final jsonFiles =
+                await response.transform(const Utf8Decoder()).toList();
+            String jsonString = '';
+            for (int i = 0; i < jsonFiles.length; ++i) {
+              jsonString += jsonFiles[i];
+            }
+            final values = jsonDecode(jsonString);
+            return values;
           }
-          final values = jsonDecode(jsonString);
-          return values;
+        } else {
+          return httpCallable!(url);
         }
       }
     } on SocketException {

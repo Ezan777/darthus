@@ -99,3 +99,27 @@
 ## 1.3.1
 
 - Changed socket exception handling
+
+## 1.3.2
+
+- Added cloud functions callable
+
+## 1.3.3
+
+- Fixed callable result
+
+## 1.3.4
+
+- Added decoding to callable result
+
+## 1.3.5
+
+- Fixing result of callable function
+
+## 1.3.6
+
+- Return type of callable didn't work for ranked information, trying to fix. Now htttpCallable is a function that require a String containing the url for a request to riot's servers
+
+## 1.3.7
+
+- Changed callable parameter form named parameter to a normal String parameter

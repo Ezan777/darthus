@@ -71,8 +71,8 @@ class Summoner {
     if (rankedJson.isNotEmpty) {
       for (var json in rankedJson) {
         json['queueType'] == 'RANKED_SOLO_5x5'
-            ? _rankSoloDuo = Rank(json)
-            : _rankFlex = Rank(json);
+            ? _rankSoloDuo = Rank(Map<String, dynamic>.from(json))
+            : _rankFlex = Rank(Map<String, dynamic>.from(json));
       }
     }
 
